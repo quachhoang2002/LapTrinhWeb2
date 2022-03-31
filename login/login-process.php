@@ -1,35 +1,41 @@
 <?php 
 $username=$_POST['username'];
 $password=$_POST['password'];
-$rememeber=$_POST['remmember'];
 
-if(isset($rememeber)){
-    $rememeber=true;
+
+if(isset($_POST['remember'])){
+   $remember= true;
 }
-else $rememeber=false;
+else $remember= false;
 
 
 
 
-require '../admin/connect.php';
+require '../HoangUser/admin/connect.php';
 $result=mysqli_query($connect,"select *from user where username='$username' and password='$password' ");
 $getItem=mysqli_fetch_array($result);
 if(mysqli_num_rows($result)==1){
     session_start();
-    $_SESSION['username']=$username;
-    header("location:../admin/manufactor");
+    $_SESSION['fullname']=$getItem['fullname'];
+    $_SESSION['id']=$getItem['id'];
+    header("location:../HoangUser/admin/manufactor");
+    
 
-    if($rememeber){
-        setcookie($remember,$getItem['key'],time()+(86400 * 5));
+    if($remember){
+        setcookie('remember', $getItem['id'] ,time() + (86400 * 5));
         
+      
     }
+  
      
 } 
+
 
 
 else {
      header("location:login-form.php");
      session_start();
      $_SESSION['error']="sai tai khoan hoac mat khau ";
+     exit;
     
 } 

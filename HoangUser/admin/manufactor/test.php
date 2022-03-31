@@ -1,3 +1,4 @@
 <?php session_start();
-unset($_SESSION['username']);
-header('location:../../login/login-form.php');
+session_destroy();
+setcookie('remember',null,-1);
+header('location:../../../login/login-form.php');

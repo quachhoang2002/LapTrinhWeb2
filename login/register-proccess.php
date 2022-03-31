@@ -6,7 +6,7 @@ $password_1=$_POST['password-1'];
 $password_2=$_POST['password-2'];
 $email=$_POST['email'];
 
-require '../admin/connect.php';
+require '../HoangUser/admin/connect.php';
 
 
       $resultUsername=mysqli_query($connect,"select * from user where username='$username'");

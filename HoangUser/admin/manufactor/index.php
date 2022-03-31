@@ -33,8 +33,9 @@
 
     ?>
 
- <span> <?php   if(isset($_SESSION['username'])){
-        echo $_SESSION['username'];
+ <span> <?php   
+       if(isset($_SESSION['id'])){
+        echo $_SESSION['fullname'];
        ?> <a href="test.php">Dang Xuat</a>
    <?php } ?> 
   </span>

@@ -9,27 +9,30 @@
 </head>
 <?php  
  
- if(isset($_SESSION['username'])){
-     header('location:../admin/manufactor');
- }
+
 if(isset($_COOKIE['remember'])){
-    require '../admin/connect.php';
-    $key=$_COOKIE['remember'];
-    $result=mysqli_query($connect,"select*from user where key=$key");
+    require '../HoangUser/admin/connect.php';
+    $id=$_COOKIE['remember'];
+    $result=mysqli_query($connect,"select* from user where id=$id");
     $row=mysqli_fetch_array($result);
     // $error=mysqli_error($connect);
     // echo $error;
-    $_SESSION['username']=$row['username'];
-    $_SESSION['password']=$row['password'];
+    $_SESSION['id'] = $row['id'];
+    $_SESSION['fullname']=$row['fullname'];
+  
 
 }
+if(isset($_SESSION['id'])){
+    header('location:../HoangUser/admin/manufactor');
+
+} 
 
  ?>
 <body>
     <a href="register-form.php">Dang Ky</a>
       <form action="login-process.php" method="POST">
-         Ten dang nhap <input type="text" name="username" value="<?php if(isset($_SESSION['username'])) echo $_SESSION['username']?>"> 
-         Mat khau <input type="password" name="password" value="<?php if(isset($_SESSION['password'])) echo $_SESSION['password'] ?>">
+         Ten dang nhap <input type="text" name="username"> 
+         Mat khau <input type="password" name="password" >
          Ghi nho dang nhap <input type="checkbox" name="remember">
          <button>dang nhap </button>
          <?php if(isset($_SESSION['error'])){
