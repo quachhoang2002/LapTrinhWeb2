@@ -19,13 +19,11 @@ if(isset($_COOKIE['remember'])){
     // echo $error;
     $_SESSION['id'] = $row['id'];
     $_SESSION['fullname']=$row['fullname'];
+    header('location:../HoangUser/User');
   
 
 }
-if(isset($_SESSION['id'])){
-    header('location:../HoangUser/admin/manufactor');
 
-} 
 
  ?>
 <body>

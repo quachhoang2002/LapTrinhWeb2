@@ -18,11 +18,11 @@ if(mysqli_num_rows($result)==1){
     session_start();
     $_SESSION['fullname']=$getItem['fullname'];
     $_SESSION['id']=$getItem['id'];
-    header("location:../HoangUser/admin/manufactor");
+    header("location:../HoangUser/User");
     
 
     if($remember){
-        setcookie('remember', $getItem['id'] ,time() + (86400 * 5));
+        setcookie('remember', $getItem['id'] ,time() + (86400 * 5),"/");
         
       
     }

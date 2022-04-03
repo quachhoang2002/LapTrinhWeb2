@@ -33,10 +33,10 @@
 
     ?>
 
- <span> <?php   
+ <span  > <?php   
        if(isset($_SESSION['id'])){
         echo $_SESSION['fullname'];
-       ?> <a href="test.php">Dang Xuat</a>
+       ?> <a href="../../../login/logout.php"> Dang Xuat</a>
    <?php } ?> 
   </span>
 
@@ -70,7 +70,14 @@
 
 
 </body> 
-<script>
- 
+<script> 
+      
+        
+  
+        
+     
+    
+        
+                  
 </script>
 </html>
