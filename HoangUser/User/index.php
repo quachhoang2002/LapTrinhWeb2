@@ -71,7 +71,7 @@
    </tr> 
    
    <?php foreach($result as $value) { ?>
-       <form action="cart-process.php" method="POST" onsubmit="return check()">
+       <form action="cart-process.php" method="POST" >
        <tr> 
        
         <td ><?php  echo $value['Name'] ?> </td>
@@ -79,7 +79,7 @@
         <td> <img height="100px" src=" ../admin/product/photos/<?php  echo $value['Image'] ?>" alt="">  </td>
         <td> 
                <br>
-         <input type="number" value="0" name="quantity" onmouseout="  checkvalue()  "  > 
+         <input type="number" value="1" name="quantity" min="1"  onkeyup=" checkvalue()  "  > 
                 <br>
           
         </td>
@@ -109,13 +109,13 @@
 
 </html>
 </body>  
-<script type="text/javascript">
+<script>
   
 
       function checkvalue(){
         var quantity=document.getElementsByName('quantity')[0].value;
-          if(quantity<0){
-            document.getElementsByName('quantity')[0].value=0
+          if(quantity<=0){
+            document.getElementsByName('quantity')[0].value=1
           }  
          if(Number.isInteger(quantity)==false){
             document.getElementsByName('quantity')[0].value=Math.round(document.getElementsByName('quantity')[0].value)
@@ -124,18 +124,7 @@
         
 
       }     
-   function check(){
-    var quantity=document.getElementsByName('quantity')[0].value;
- 
-     
-    if(quantity==0){
-            alert('nhap so luong')
-            return false 
-          }
-        
-   
-  
-   }
+
  
   
 
