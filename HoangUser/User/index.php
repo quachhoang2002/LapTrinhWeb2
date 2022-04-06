@@ -9,6 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
+    <script   src="../../jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <!DOCTYPE html>
@@ -74,12 +76,12 @@
        <form action="cart-process.php" method="POST" >
        <tr> 
        
-        <td ><?php  echo $value['Name'] ?> </td>
+        <td id="a" ><?php  echo $value['Name'] ?> </td>
         <td> <?php  echo $value['Price'] ?>   </td>
         <td> <img height="100px" src=" ../admin/product/photos/<?php  echo $value['Image'] ?>" alt="">  </td>
         <td> 
                <br>
-         <input type="number" value="1" name="quantity" min="1"  onkeyup=" checkvalue()  "  > 
+         <input type="number" value="1" name="quantity" min="1" max="50" onmouseout=" checkvalue()  "  > 
                 <br>
           
         </td>
@@ -87,16 +89,10 @@
        <input type="hidden" name="name" value="<?php echo $value['Name'] ?>">
        <input type="hidden" name="price" value="<?php echo $value['Price'] ?>">
        <input type="hidden" name="image" value="<?php echo $value['Image'] ?>">
-       <input type="hidden" name="user_id" value="<?php 
-                                                  if(isset($_SESSION['id']))
-                                                              {
-                                                                 echo $_SESSION['id'] ; 
-                                                              } 
-                                                  else echo''; ?>
-                                                  ">
+       <input type="hidden" name="user_id" value="<?php  echo $_SESSION['id'] ;?>">
        
-         <td> <button> addtocart </button>  </td>
-   
+         <td> <button>addtoCart </button> </td>
+      
         
       </tr> 
          
@@ -106,10 +102,12 @@
 
    <?php }   ?>
      </table>
+     
+   
 
 </html>
 </body>  
-<script>
+<script >
   
 
       function checkvalue(){
@@ -122,8 +120,8 @@
          } 
          
         
-
       }     
+      
 
  
   

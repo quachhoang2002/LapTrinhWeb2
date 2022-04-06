@@ -40,7 +40,7 @@
                   <td> <img src=" ../admin/product/photos/<?php echo $each['image'] ?> " alt="" height="100px">  </td>
                   <td> <?php echo $each['product_name'] ?> </td>
                   <td>  <?php echo $each['price'] ?> </td>
-                  <td > <input type="number" id="quantity_<?php echo $each['id']?>" min="0"  style="text-align:center"  pattern="[1-99]*" onchange="edit_data(<?php echo $each['id']?>)"  value="<?php echo $each['quantity']?>" > </td>
+                  <td > <input type="number" id="quantity_<?php echo $each['id']?>" min="0"  style="text-align:center"  pattern="[1-30]*" onchange="edit_data(<?php echo $each['id']?>)"  value="<?php echo $each['quantity']?>" > </td>
                   <td >  <?php echo $each['price']*$each['quantity'] ?>  </td>
                  <td> <input type="button" value="xoa" onclick="delete_data(<?php  echo $each['id'] ?>)"> </td>
           </tr>
@@ -69,17 +69,19 @@
   <script type="text/javascript">
   
       function edit_data(id){
-     var quantity=document.getElementById("quantity_"+id).value
-       
+     var quantity=$("#quantity_"+id).val()
+      
         if(quantity<=0){ 
           if(confirm('ban muon xoa chu')==false){
             window.location.reload()
             return false
           }
-          
-         
-        
-        }   
+       }   
+       if(quantity>30){
+         alert("toi da 30 ")
+         window.location.reload()
+         return false ;
+       }
 
        $.ajax({
             url:"update-cart.php",

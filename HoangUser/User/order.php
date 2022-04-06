@@ -41,14 +41,17 @@
        </tr>
   
  </table>   
-  <form action="">
-      Name <input type="text" name="name"> 
+  <form action="order-process.php" method="POST">
+         <input type="hidden" value="<?php echo $_SESSION['id']  ?>">
+      Name recive<input type="text" name="name"> 
      <br>
-      Address<input type="text" name="address"> 
+      Address recive<input type="text" name="address"> 
       <br>
-     Phone <input type="text" name="phone"> 
+     Phone recive<input type="text" name="phone"> 
      <br>
-    <button> Thanh Toan</button>
+     <input type="hidden" name="total" value="<?php echo $total ?>">
+     
+         <button> Thanh Toan</button>
   </form>
 
 
