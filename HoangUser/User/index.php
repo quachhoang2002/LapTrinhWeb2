@@ -89,7 +89,7 @@
        <input type="hidden" name="name" value="<?php echo $value['Name'] ?>">
        <input type="hidden" name="price" value="<?php echo $value['Price'] ?>">
        <input type="hidden" name="image" value="<?php echo $value['Image'] ?>">
-       <input type="hidden" name="user_id" value="<?php  echo $_SESSION['id'] ;?>">
+       <input type="hidden" name="user_id" value="<?php if(isset($_SESSION['id'])) echo $_SESSION['id']; else echo "" ;?>">
        
          <td> <button>addtoCart </button> </td>
       
