@@ -27,14 +27,16 @@ if(empty($_SESSION['id'])){
      insert into cart(product_name,price,image,product_id,quantity,user_id) 
      values ('$name',$price,'$image',$product_id,$quantity,$user_id)  "; 
       mysqli_query($connect,$sql);
+      header('location:cart.php');
     
      
  } 
  else {
-     mysqli_query($connect,"update cart set quantity=quantity+$quantity where product_id=$product_id and user_id=$user_id");
-  
+    header('location:cart.php');
+    
+    
  }
- header('location:index.php');
+
   
 
 

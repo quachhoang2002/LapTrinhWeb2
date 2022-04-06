@@ -6,9 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <script   src="../../jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
-<script   src="../../jquery-3.6.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <body> 
 <?php 
      session_start();
@@ -19,9 +21,10 @@
       $result_total= mysqli_query($connect,"select sum(price*quantity) as tong from cart where user_id=$user_id");
        $total=mysqli_fetch_array($result_total)['tong'];
      
-  ?> 
+  ?>  
+  <a href="index.php"> Mua Hang</a>
   <?php if ($row>=1){ ?>
-
+        
      <table border="1" >
           <tr>
             <td></td>
@@ -37,9 +40,9 @@
                   <td> <img src=" ../admin/product/photos/<?php echo $each['image'] ?> " alt="" height="100px">  </td>
                   <td> <?php echo $each['product_name'] ?> </td>
                   <td>  <?php echo $each['price'] ?> </td>
-                  <td >   <input type="number" id="quantity_<?php echo $each['id']?>" min="1"  style="text-align:center"  pattern="[1-99]* "onchange="edit_data(<?php echo $each['id']?>)"  value="<?php echo $each['quantity']?>"  > </td>
+                  <td > <input type="number" id="quantity_<?php echo $each['id']?>" min="0"  style="text-align:center"  pattern="[1-99]*" onchange="edit_data(<?php echo $each['id']?>)"  value="<?php echo $each['quantity']?>" > </td>
                   <td >  <?php echo $each['price']*$each['quantity'] ?>  </td>
-             
+                 <td> <input type="button" value="xoa" onclick="delete_data(<?php  echo $each['id'] ?>)"> </td>
           </tr>
                   
            
@@ -49,8 +52,8 @@
            </tr>
    </table> 
 
-   <a href="update-cart.php">Update</a> 
-   <a href="">Orders</a>
+  
+   <a href="order.php?id=<?php echo $user_id?>">Orders</a>
    
  
  <?php }   
@@ -64,17 +67,19 @@
 
   ?>
   <script type="text/javascript">
-   
+  
       function edit_data(id){
      var quantity=document.getElementById("quantity_"+id).value
-        if(quantity<=0){
-          confirm("ban muon xoa truong nay chua ")
-           if(confirm) return true 
-           else return false 
-          window.reload();
-        } 
-
-
+       
+        if(quantity<=0){ 
+          if(confirm('ban muon xoa chu')==false){
+            window.location.reload()
+            return false
+          }
+          
+         
+        
+        }   
 
        $.ajax({
             url:"update-cart.php",
@@ -85,16 +90,26 @@
             }
 
 
-       })
-       
-        
-       
-         
-        
-
+       }) 
       
        
-      } 
+        }  
+
+        function delete_data(id){
+          
+        if(confirm("ban muon xua nay chu")==true){
+            $.ajax({ 
+            url:"delete-cart.php",
+            method:"POST",
+            data:{id:id},
+            success:function(data){
+              location.reload();
+            }
+          })
+         } 
+         else return false;
+         
+        }
      
      
   </script>
