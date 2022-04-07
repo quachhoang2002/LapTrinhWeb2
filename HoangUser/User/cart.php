@@ -14,6 +14,10 @@
 <body> 
 <?php 
      session_start();
+     if(empty($_SESSION['id'])){
+      header('location:../../login/login-form.php');
+      exit;
+     }
        require('../admin/connect.php');
       $user_id=$_SESSION['id'];
       $result=mysqli_query($connect,"select * from cart where user_id=$user_id");
@@ -60,10 +64,7 @@
   
        else echo "chua co san pham ";
        
-       if(empty($_SESSION['id'])){
-        header('location:../../login/login-form.php');
-        exit;
-       }
+       
 
   ?>
   <script type="text/javascript">

@@ -73,7 +73,7 @@
    </tr> 
    
    <?php foreach($result as $value) { ?>
-       <form action="cart-process.php" method="POST" >
+       <form action="" >
        <tr> 
        
         <td id="a" ><?php  echo $value['Name'] ?> </td>
@@ -81,17 +81,19 @@
         <td> <img height="100px" src=" ../admin/product/photos/<?php  echo $value['Image'] ?>" alt="">  </td>
         <td> 
                <br>
-         <input type="number" value="1" name="quantity" min="1" max="50" onmouseout=" checkvalue()  "  > 
+         <input type="number" value="1" name="quantity" min="1" max="50" onmouseout=" checkvalue()" id="quantity_<?php echo $value['id'] ?>"  > 
                 <br>
           
         </td>
-       <input type="hidden" name="id" value="<?php echo $value['id'] ?>">
-       <input type="hidden" name="name" value="<?php echo $value['Name'] ?>">
-       <input type="hidden" name="price" value="<?php echo $value['Price'] ?>">
-       <input type="hidden" name="image" value="<?php echo $value['Image'] ?>">
-       <input type="hidden" name="user_id" value="<?php if(isset($_SESSION['id'])) echo $_SESSION['id']; else echo "" ;?>">
+       <input type="hidden" name="id" value="<?php echo $value['id'] ?>" id="id_<?php echo $value['id'] ?>">
+       <input type="hidden" name="name" value="<?php echo $value['Name'] ?>" id="name_<?php echo $value['id'] ?>">
+       <input type="hidden" name="price" value="<?php echo $value['Price'] ?>" id="price_<?php echo $value['id'] ?>">
+       <input type="hidden" name="image" value="<?php echo $value['Image'] ?>" id="image_<?php echo $value['id'] ?>" >
+       <input type="hidden" name="user_id" value="<?php if(isset($_SESSION['id'])) echo $_SESSION['id']; else echo "" ;?>" id="userID_<?php echo $value['id'] ?>">
        
-         <td> <button>addtoCart </button> </td>
+         <td> <input type="button" onclick="addtoCart(<?php echo $value['id'] ?>)" value="addtoCart"> </td>
+         <td> <input type="button" onclick="order(<?php echo $value['id'] ?>)" value="order"> </td>
+
       
         
       </tr> 
@@ -107,7 +109,7 @@
 
 </html>
 </body>  
-<script >
+<script type="text/javascript">
   
 
       function checkvalue(){
@@ -121,9 +123,41 @@
          
         
       }     
-      
+      function addtoCart(id){
+          var product_id= $('#id_'+id).val() ;
+          var name= $('#name_'+id).val() ;
+          var price= $('#price_'+id).val() ;
+          var image= $('#image_'+id).val() ;
+          var user_id= $('#userID_'+id).val() ;
+          var quantity=$('#quantity_'+id).val();
 
- 
+        $.ajax({
+             url:"cart-process.php",
+             method:"post",
+             data:{id:product_id,name:name,price:price,image:image,user_id:user_id,quantity:quantity},
+             success:function(data){
+               alert('them thanh cong')
+             }
+           })
+      }
+
+ function order(id){
+  var product_id= $('#id_'+id).val() ;
+          var name= $('#name_'+id).val() ;
+          var price= $('#price_'+id).val() ;
+          var image= $('#image_'+id).val() ;
+          var user_id= $('#userID_'+id).val() ;
+          var quantity=$('#quantity_'+id).val();
+
+        $.ajax({
+             url:"cart-process.php",
+             method:"post",
+             data:{id:product_id,name:name,price:price,image:image,user_id:user_id,quantity:quantity},
+             success:function(data){
+              location.href="cart.php"
+             }
+           })
+ }
   
 
 </script>
