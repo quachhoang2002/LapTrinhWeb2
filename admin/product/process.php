@@ -11,7 +11,7 @@ $file_name=time().basename(($image['name'])) ;
 $target_file=$target_dir . $file_name;
 move_uploaded_file($image["tmp_name"],$target_file);
 
-require '../connect.php';
+require '../../connect.php';
 
 mysqli_query($connect,"insert into product(Name,Price,Image,description,manufacture_id) values('$name',$price,'$file_name','$description','$manufacture_id')");
 

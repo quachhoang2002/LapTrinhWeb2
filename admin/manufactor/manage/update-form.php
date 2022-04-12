@@ -9,7 +9,7 @@
 <body>
     <?php 
     $ma=$_GET['ma'];
-    require('../../connect.php');
+    require '../../../connect.php';
     $sql="select* from manufacture where Ma=$ma";
     $result=mysqli_query($connect,$sql);
     $item=mysqli_fetch_array($result);

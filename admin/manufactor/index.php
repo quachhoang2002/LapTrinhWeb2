@@ -1,4 +1,13 @@
-<?php    session_start(); ?>
+<?php    session_start();
+        
+           if(!isset($_SESSION['level'])){
+            header('location:../../admin-login/adminLogin-form.php');
+                     
+           } 
+        
+       
+ 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +35,7 @@
      </span> 
    <?php } 
    
-    require('../connect.php');
+    require('../../connect.php');
     $sql="select* from manufacture";
     $result=mysqli_query($connect,$sql);
   
@@ -34,9 +43,9 @@
     ?>
 
  <span  > <?php   
-       if(isset($_SESSION['id'])){
-        echo $_SESSION['fullname'];
-       ?> <a href="../../../login/logout.php"> Dang Xuat</a>
+       if(isset($_SESSION['adminID'])){
+        echo $_SESSION['adminName'];
+       ?> <a href="../../login/logout.php"> Dang Xuat</a>
    <?php } ?> 
   </span>
 

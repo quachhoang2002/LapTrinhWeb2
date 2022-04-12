@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     
-    <script   src="../../jquery-3.6.0.min.js"></script>
+    <script   src="../jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <!DOCTYPE html>
@@ -24,8 +24,8 @@
 
     <?php  
     
-    require '../admin/menu.php';
-     require('../admin/connect.php');
+    
+     require('../connect.php');
      $sql="select product.*, 
      manufacture.name as manufacture_name
      from product 
@@ -52,7 +52,7 @@
                   <span  > <?php   
            if(isset($_SESSION['id'])){
            echo $_SESSION['fullname'];
-             ?> <a href="../../login/logout.php"> Dang Xuat</a>
+             ?> <a href="../login/logout.php"> Dang Xuat</a>
                    
                    <?php } ?> 
                    </span> <?php
@@ -81,7 +81,7 @@
         <td> <img height="100px" src=" ../admin/product/photos/<?php  echo $value['Image'] ?>" alt="">  </td>
         <td> 
                <br>
-         <input type="number" value="1" name="quantity" min="1" max="50" onmouseout=" checkvalue()" id="quantity_<?php echo $value['id'] ?>"  > 
+         <input type="number" value="1" name="quantity" min="1" max="50"    id="quantity_<?php echo $value['id'] ?>"  onchange="checkvalue(<?php echo $value['id'] ?>)" > 
                 <br>
           
         </td>
@@ -111,18 +111,27 @@
 </body>  
 <script type="text/javascript">
   
+  
 
-      function checkvalue(){
-        var quantity=document.getElementsByName('quantity')[0].value;
-          if(quantity<=0){
-            document.getElementsByName('quantity')[0].value=1
-          }  
-         if(Number.isInteger(quantity)==false){
-            document.getElementsByName('quantity')[0].value=Math.round(document.getElementsByName('quantity')[0].value)
-         } 
-         
+      function checkvalue(id){
+        var quantity=$('#quantity_'+id).val();
         
-      }     
+          if(quantity<=0){
+            $('#quantity_'+id).val(1)
+          }  
+         
+          if(quantity!= parseInt(quantity)){
+            quantity=$('#quantity_'+id).val(Math.round($('#quantity_'+id).val()))
+          }
+          
+      
+
+        }   
+
+      
+        
+
+
       function addtoCart(id){
           var product_id= $('#id_'+id).val() ;
           var name= $('#name_'+id).val() ;
@@ -130,25 +139,26 @@
           var image= $('#image_'+id).val() ;
           var user_id= $('#userID_'+id).val() ;
           var quantity=$('#quantity_'+id).val();
-
+       
+              
         $.ajax({
              url:"cart-process.php",
              method:"post",
              data:{id:product_id,name:name,price:price,image:image,user_id:user_id,quantity:quantity},
              success:function(data){
-               alert('them thanh cong')
+                  alert('them thanh cong')
              }
            })
       }
-
+     
  function order(id){
-  var product_id= $('#id_'+id).val() ;
+       var product_id= $('#id_'+id).val() ;
           var name= $('#name_'+id).val() ;
           var price= $('#price_'+id).val() ;
           var image= $('#image_'+id).val() ;
           var user_id= $('#userID_'+id).val() ;
           var quantity=$('#quantity_'+id).val();
-
+     
         $.ajax({
              url:"cart-process.php",
              method:"post",

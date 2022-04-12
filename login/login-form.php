@@ -11,7 +11,7 @@
  
 
 if(isset($_COOKIE['remember'])){
-    require '../HoangUser/admin/connect.php';
+    require '../connect.php';
     $id=$_COOKIE['remember'];
     $result=mysqli_query($connect,"select* from user where id=$id");
     $row=mysqli_fetch_array($result);
@@ -19,7 +19,7 @@ if(isset($_COOKIE['remember'])){
     // echo $error;
     $_SESSION['id'] = $row['id'];
     $_SESSION['fullname']=$row['fullname'];
-    header('location:../HoangUser/User');
+    header('location:../User');
   
 
 }

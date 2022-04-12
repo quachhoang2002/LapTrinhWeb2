@@ -1,5 +1,5 @@
 <?php 
-require('../admin/connect.php'); 
+require('../connect.php'); 
 $id=$_POST['id'];
 $quantity=$_POST['quantity'];
 echo $quantity;

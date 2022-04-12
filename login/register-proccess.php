@@ -6,7 +6,7 @@ $password_1=$_POST['password-1'];
 $password_2=$_POST['password-2'];
 $email=$_POST['email'];
 
-require '../HoangUser/admin/connect.php';
+require '../connect.php';
 
 
       $resultUsername=mysqli_query($connect,"select * from user where username='$username'");
@@ -64,10 +64,10 @@ require '../HoangUser/admin/connect.php';
         header('location:register-form.php');
         exit;
     } 
-    mysqli_query($connect,"insert into user(fullname,username,phone,password,email) values ('$name','$username','$phone','$password_1','$email')"); 
+    mysqli_query($connect,"insert into user(fullname,username,phone,password,email) values ('$name','$username','$phone',PASSWORD('$password_1'),'$email')"); 
     $error=mysqli_error($connect);
     echo $error;
-    header('location:register-proccess.php');
+    header('location:login-form.php');
     mysqli_close($connect);
     $_SESSION['success']="dang ky thanh cong ";
 

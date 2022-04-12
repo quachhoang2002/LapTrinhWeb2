@@ -14,7 +14,7 @@ if(empty($name)||empty($phone)||empty($image)){
 }
 
 
-require('../../connect.php');
+require '../../../connect.php';
  $sql=" update manufacture
     set 
   name='$name',

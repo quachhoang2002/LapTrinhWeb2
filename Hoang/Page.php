@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="../jquery-3.6.0.min.js"></script>
 </head>
 <body>
      <div> </div>
       <?php
-       $connect=mysqli_connect('localhost','root','','hoang');
+        require '../connect.php';
       
        
       $page=1;
@@ -70,12 +71,12 @@
    
        foreach($result as $test){?>
             <tr>  
-                <td><?php  echo"$test[Ma]"     ?></td>
-                <td> <?php echo"$test[Ten] "      ?>   </td>
-                <td >    <a href="Content.php?ma=<?php echo $test['Ma'] ?>"> <?php echo"$test[noi_dung] "     ?> </a>    </td>
-                <td>  <img src="<?php echo"$test[hinh_anh] "      ?> " alt="" height="100PX"> </td>
-                <td> <a  href="FormUpdate.php?ma=<?php echo $test['Ma'] ?> "> Sua</a></td>
-                <td>  <a href="Delete.php?ma=<?php echo $test['Ma'] ?> "> xoa </a>  </td>
+                <td> <?php  echo"$test[Ma]"     ?> </td>
+                <td id="name<?php echo"$test[Ma]"?>"> <?php echo"$test[Ten] "      ?>   </td>
+                <td id="description<?php echo"$test[Ma]"?>">    <a href="Content.php?ma=<?php echo $test['Ma'] ?>"> <?php echo"$test[noi_dung] "     ?> </a>    </td>
+                <td id="image<?php echo"$test[Ma]"?>">  <img src="<?php echo"$test[hinh_anh] "      ?> " alt="" height="100PX"> </td>
+                <td > <input type="button" onclick="Update(<?php echo $test['Ma']?>)" value="Sua"> </td>
+                <td >  <input type="button" onclick="Delete(<?php echo $test['Ma']?>)" value="Xoa"> </td>
               
 
             </tr>
@@ -87,10 +88,62 @@
      </table>
      <?php  for($i=1;$i<=$PerPage;$i++){ ?>
                 <a href="?page=<?php echo $i ?>&search=<?php echo $search ?>"> <button><?php echo $i ?></button></a> 
-
-
-
                <?php }  ?>
                <?php mysqli_close($connect) ?>
+         
+               
+    
+     
+  <div id="update">
+
+  </div>
+            
+
 </body>
+<script type="text/javascript">
+      
+           function Delete(id){
+                  $.ajax({
+                    url:'Delete.php',
+                    method:'GET',
+                    data:{id:id },
+                    success:function(data){
+                      alert('xoa thanh cong ')
+                    location.href='Page.php';
+                    }
+
+                  })
+           }
+
+           function Update(id){
+                     var name=$('#name'+id).html()
+                      var description=$('#description'+id).find('a').html()
+                      console.log(description);
+                      var image=$('#image'+id).find('img').attr('src')
+                  
+                      
+                        $('#update').html(
+                            ` <form action="update.php" method="POST">
+ 
+                               
+                                <input value="${name}" name="name"  > 
+                                </br>
+                                <input  value="${description}" name="noi_dung"> 
+                                </br>
+                                 <input value="${image}" name="anh" >
+                                 </br>
+                                 <button> </button>                             
+                                  </form>     
+    
+                              `
+                            
+                              
+                        )
+              
+                        
+
+                         
+           }
+ 
+</script>
 </html>

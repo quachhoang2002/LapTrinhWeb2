@@ -3,7 +3,7 @@ $ma=$_POST['ma'];
 $ten=$_POST['name'];
 $noi_dung=$_POST['noi_dung'];
 $anh=$_POST['anh'];
-require 'connect.php';
+require '../connect.php';
 $sql="update test1 
         set 
             Ten='$ten' ,

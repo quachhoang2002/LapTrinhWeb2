@@ -3,7 +3,7 @@
  $noi_dung=$_POST['noi_dung'];
  $hinh_anh=$_POST['anh'];
 
-$connect= mysqli_connect('localhost','root','','hoang');
+ require '../connect.php';
 $sql="insert into test1(Ten,noi_dung,hinh_anh) values('$ten','$noi_dung','$hinh_anh')";
 //  die($sql);
 mysqli_query($connect,$sql);

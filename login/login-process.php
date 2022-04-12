@@ -11,14 +11,14 @@ else $remember= false;
 
 
 
-require '../HoangUser/admin/connect.php';
-$result=mysqli_query($connect,"select *from user where username='$username' and password='$password' ");
+require '../connect.php';
+$result=mysqli_query($connect,"select *from user where username='$username' and password=PASSWORD('$password') ");
 $getItem=mysqli_fetch_array($result);
 if(mysqli_num_rows($result)==1){
     session_start();
     $_SESSION['fullname']=$getItem['fullname'];
     $_SESSION['id']=$getItem['id'];
-    header("location:../HoangUser/User");
+    header("location:../User");
     
 
     if($remember){

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <script   src="../../jquery-3.6.0.min.js"></script>
+    <script   src="../jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
@@ -15,10 +15,10 @@
 <?php 
      session_start();
      if(empty($_SESSION['id'])){
-      header('location:../../login/login-form.php');
+      header('location:../login/login-form.php');
       exit;
      }
-       require('../admin/connect.php');
+       require('../connect.php');
       $user_id=$_SESSION['id'];
       $result=mysqli_query($connect,"select * from cart where user_id=$user_id");
       $row=mysqli_num_rows($result);
@@ -35,7 +35,7 @@
             <td>Ten</td>
             <td>Gia</td>
             <td>So Luong</td>
-            <td>Tong Tien</td>
+            <td>Tam Tinh</td>
           </tr>
 
          <?php foreach($result as $each){?>
@@ -43,16 +43,16 @@
            <tr>
                   <td> <img src=" ../admin/product/photos/<?php echo $each['image'] ?> " alt="" height="100px">  </td>
                   <td> <?php echo $each['product_name'] ?> </td>
-                  <td>  <?php echo $each['price'] ?> </td>
+                  <td id="price<?php echo $each['id'] ?>">  <?php echo $each['price'] ?> </td>
                   <td > <input type="number" id="quantity_<?php echo $each['id']?>" min="0"  style="text-align:center"  pattern="[1-30]*" onchange="edit_data(<?php echo $each['id']?>)"  value="<?php echo $each['quantity']?>" > </td>
-                  <td >  <?php echo $each['price']*$each['quantity'] ?>  </td>
+                  <td id="temp<?php echo $each['id'] ?>" class="temp" >  <?php echo $each['price']*$each['quantity'] ?>  </td>
                  <td> <input type="button" value="xoa" onclick="delete_data(<?php  echo $each['id'] ?>)"> </td>
           </tr>
                   
            
        <?php  } ?> 
            <tr>
-             <td colspan="5" style="text-align: center;" > Tong Tien :<?php echo $total ?></td>
+             <td colspan="5" style="text-align: center;" id="total" > Tong Tien :<?php echo $total ?></td>
            </tr>
    </table> 
 
@@ -78,19 +78,29 @@
             window.location.reload()
             return false
           }
+       } 
+       if(quantity!= parseInt(quantity)){
+        window.location.reload() 
+        return false
        }   
-       if(quantity>30){
-         alert("toi da 30 ")
-         window.location.reload()
-         return false ;
-       }
+
+      
 
        $.ajax({
             url:"update-cart.php",
             method:"POST",
             data:{id:id,quantity:quantity},
             success:function(data){
-                 location.reload();
+                 var price=parseInt($('#price'+id).html())
+                 var total=0
+            $('#temp'+id).html(quantity*price) 
+            
+            $('.temp').each(function(){
+                    total+=parseFloat($(this).html()) ;
+                    console.log(total);
+                   
+              }) 
+              $('#total').html('Tong Tien :'+total);
             }
 
 

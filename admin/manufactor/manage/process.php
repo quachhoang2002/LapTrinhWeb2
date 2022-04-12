@@ -8,7 +8,7 @@ exit;
 $name=$_POST['name'];
   $phone=$_POST['phone'];
   $image=$_POST['image'];
-include('../../connect.php');
+  require '../../../connect.php';
 $sql="insert into manufacture(name,phone,image) values('$name','$phone','$image')";
 
  $error= mysqli_error($connect);

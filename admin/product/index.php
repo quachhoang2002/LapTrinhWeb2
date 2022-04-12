@@ -8,8 +8,8 @@
 </head>
 <body>
     <?php 
-    require '../menu.php';
-     require('../connect.php');
+    
+     require('../../connect.php');
      $sql="select* from product
      join manufacture on manufacture.Ma=product.manufacture_id
      ";

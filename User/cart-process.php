@@ -4,7 +4,7 @@
 session_start() ;
   
 if(empty($_SESSION['id'])){
-  header('location:../../login/login-form.php');
+  header('location:../login/login-form.php');
   exit;
  }
 
@@ -14,7 +14,7 @@ if(empty($_SESSION['id'])){
   $price=$_POST['price'] ;
   $image=$_POST['image'] ;
   $user_id=$_POST['user_id'];
-  require('../admin/connect.php');
+  require('../connect.php');
  
   
   $result=mysqli_query($connect,"select*from cart where product_id=$product_id and user_id=$user_id");
@@ -34,7 +34,7 @@ if(empty($_SESSION['id'])){
      mysqli_query($connect,"update cart set quantity=quantity+$quantity where product_id=$product_id and user_id=$user_id");
   
  }
-
+ header('location:index.php')
   
 
 

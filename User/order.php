@@ -7,7 +7,7 @@
        <title>Document</title>
 </head>
 <?php 
-     require('../admin/connect.php');
+     require('../connect.php');
      $id=$_GET['id'];
      $result =mysqli_query($connect,"select * from cart where user_id=$id");
      $result_total= mysqli_query($connect,"select sum(price*quantity) as tong from cart where user_id=$id");

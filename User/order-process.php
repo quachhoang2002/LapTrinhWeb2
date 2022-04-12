@@ -1,6 +1,6 @@
 <?php 
 session_start();
-     require('../admin/connect.php');
+     require('../connect.php');
      $name=$_POST['name'];
      $address=$_POST['address'];
      $phone=$_POST['phone'];

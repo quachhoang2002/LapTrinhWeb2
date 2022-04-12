@@ -4,5 +4,8 @@
     </li>
     <li>
     <a href="../product">Product</a>
+    </li> 
+    <li>
+        <a href="../adminManage/UserAccountList.php">Account</a>
     </li>
 </ul>

@@ -8,8 +8,8 @@
 </head>
 <body>
     <?php  
+      require '../connect.php';
        $ma=$_GET['ma'];
-       $connect=mysqli_connect('localhost','root','','hoang');
        $sql="select*from test1 
               where Ma=$ma ";
         $result=mysqli_query($connect,$sql);

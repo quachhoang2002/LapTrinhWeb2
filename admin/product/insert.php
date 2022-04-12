@@ -8,7 +8,7 @@
 </head>
 <body> 
     <?php 
-      require('../connect.php');
+      require('../../connect.php');
       $sql="select* from manufacture 
                            ";
       $manufactor=mysqli_query($connect,$sql);
