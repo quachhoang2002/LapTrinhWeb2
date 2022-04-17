@@ -72,7 +72,7 @@
      <td><?php echo $value['phone'] ?></td>
      <td >  <img src="<?php echo $value['image']?>" alt="" style="height: 50px;"></td>
      <td> <a href="manage/update-form.php?ma=<?php echo $value['Ma'] ?>"> Sua</a></td>
-     <td> <a href="manage/delete.php?ma=<?php echo $value['Ma'] ?>">  xoa</a> </td>
+     <td> <a href="manage/process.php?action=delete&ma=<?php echo $value['Ma'] ?>">  xoa</a> </td>
  </tr> <?php }
      ?>
     </table>

@@ -1,14 +1,4 @@
-<?php 
-  require '../../connect.php';
- $result= mysqli_query($connect,"select product.id,product.Name,
-  (   
-      SELECT 
-      ifnull(SUM(order_detail.quantity),0)
-      FROM order_detail 
-      WHERE order_detail.product_id=product.id and order_detail.order_id=(SELECT orders.id from orders where orders.status=1)
-  ) as quantitySale from product GROUP BY product.id ")
-
-?> 
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,22 +6,44 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-</head>
-<body> 
-  <table border="1">
-   <tr>
-     <td>ID</td>
-     <td>TEN</td>
-     <td>SL</td>
-   </tr>  
+  <link rel="stylesheet" href="style.css">
+  <script src="../../jquery-3.6.0.min.js"></script>
+</head> 
+<body>  
+<input type="date" name="date_1" value="<?php echo date('2022-01-01') ?>" min="<?php echo date('2022-01-01')?>"    >
+   <input type="date" name="date_2" value="<?php echo date('Y-m-d') ?>" max="<?php echo date('Y-m-d') ?>" >
+  <button id="product_sale"> Thong Ke San Pham </button>
+
+
+
+
+  <button id="sales">  Thong Ke Doanh Thu</button>
+  <table border="1" id="product_statistics">
   
-  <?php foreach($result as $each){?>
-      <tr>
-        <td><?php echo $each['id'] ?></td>
-        <td> <?php echo $each['Name'] ?></td>
-        <td> <?php echo $each['quantitySale'] ?></td>
-      </tr>
- <?php } ?>
+
  </table>
+
+
+
 </body>
+
+
+<script type="text/javascript">
+    var date_1= $('input[name=date_1]').val() ;
+    var date_2=$('input[name=date_2]').val() 
+    
+    //set max value for input date
+    $("input[name=date_1]").attr('max',date_2)
+    $("input[name=date_2]").attr('min',date_1)
+
+ 
+    $("#product_sale").click(function(){
+            $("#product_statistics").load('process.php?action=product_statistics',{})
+    })
+  
+  
+  
+
+</script>
+
 </html>

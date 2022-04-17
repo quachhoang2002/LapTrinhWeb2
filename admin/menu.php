@@ -6,6 +6,6 @@
     <a href="../product">Product</a>
     </li> 
     <li>
-        <a href="../adminManage/UserAccountList.php">Account</a>
+        <a href="../adminManage/">Account</a>
     </li>
 </ul>

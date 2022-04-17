@@ -28,7 +28,7 @@ if(isset($_COOKIE['remember'])){
  ?>
 <body>
     <a href="register-form.php">Dang Ky</a>
-      <form action="login-process.php" method="POST">
+      <form action="process.php?action=login" method="POST">
          Ten dang nhap <input type="text" name="username"> 
          Mat khau <input type="password" name="password" >
          Ghi nho dang nhap <input type="checkbox" name="remember">

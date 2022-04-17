@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,7 @@
 </head>
 <?php 
      require('../connect.php');
-     $id=$_GET['id'];
+     $id=$_SESSION['id'];
      $result =mysqli_query($connect,"select * from cart where user_id=$id");
      $result_total= mysqli_query($connect,"select sum(price*quantity) as tong from cart where user_id=$id");
        $total=mysqli_fetch_array($result_total)['tong'];
@@ -41,7 +42,7 @@
        </tr>
   
  </table>   
-  <form action="order-process.php" method="POST">
+  <form action="process.php?action=order" method="POST">
          <input type="hidden" value="<?php echo $_SESSION['id']  ?>">
       Name recive<input type="text" name="name"> 
      <br>

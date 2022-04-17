@@ -124,7 +124,7 @@
                       
                         $('#update').html(
                             ` <form action="update.php" method="POST">
- 
+                            <input value="${id}" name="ma" type="hidden"  > 
                                
                                 <input value="${name}" name="name"  > 
                                 </br>

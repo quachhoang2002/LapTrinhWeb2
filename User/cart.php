@@ -40,7 +40,7 @@
 
          <?php foreach($result as $each){?>
          
-           <tr>
+           <tr >
                   <td> <img src=" ../admin/product/photos/<?php echo $each['image'] ?> " alt="" height="100px">  </td>
                   <td> <?php echo $each['product_name'] ?> </td>
                   <td id="price<?php echo $each['id'] ?>">  <?php echo $each['price'] ?> </td>
@@ -57,7 +57,7 @@
    </table> 
 
   
-   <a href="order.php?id=<?php echo $user_id?>">Orders</a>
+   <a href="order.php">Orders</a>
    
  
  <?php }   
@@ -75,10 +75,13 @@
       
         if(quantity<=0){ 
           if(confirm('ban muon xoa chu')==false){
-            window.location.reload()
+           location.reload()
             return false
-          }
+          } else {
+            $('#temp'+id).parent().remove();}
+          
        } 
+
        if(quantity!= parseInt(quantity)){
         window.location.reload() 
         return false
@@ -87,43 +90,46 @@
       
 
        $.ajax({
-            url:"update-cart.php",
+            url:"process.php?action=update",
             method:"POST",
             data:{id:id,quantity:quantity},
             success:function(data){
                  var price=parseInt($('#price'+id).html())
                  var total=0
-            $('#temp'+id).html(quantity*price) 
+            $('#temp'+id).html(quantity*price)  
+    
             
             $('.temp').each(function(){
                     total+=parseFloat($(this).html()) ;
-                    console.log(total);
-                   
-              }) 
+                    console.log(total);               
+                 }) 
+
+                if(total<=0){
+                    location.reload();
+                 }
+             
               $('#total').html('Tong Tien :'+total);
-            }
+           }
 
-
-       }) 
-      
-       
-        }  
+         }) 
+   
+     }  
 
         function delete_data(id){
           
         if(confirm("ban muon xua nay chu")==true){
             $.ajax({ 
-            url:"delete-cart.php",
+            url:"process.php?action=delete",
             method:"POST",
             data:{id:id},
             success:function(data){
-              location.reload();
+              window.location.reload();
             }
           })
-         } 
+        } 
          else return false;
          
-        }
+     }
      
      
   </script>

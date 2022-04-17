@@ -58,7 +58,7 @@
 <script  type="text/javascript">
      function block(id){
             $.ajax({
-              url:'BlockProcess.php',
+              url:'process.php?action=user',
               method:'POST',
               data:{id:id},
               success:function(data){

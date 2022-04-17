@@ -15,7 +15,12 @@ $sql="update test1
         ";
 
 
-mysqli_query($connect,$sql);
-$loi=mysqli_error($connect);
-echo $loi;
+
+
+ if(mysqli_query($connect,$sql)){
+     header('location:Page.php');
+ } 
+ {
+    header('location:Page.php');
+ }
 mysqli_close($connect);

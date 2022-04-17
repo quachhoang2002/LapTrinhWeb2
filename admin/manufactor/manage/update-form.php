@@ -13,18 +13,18 @@
     $sql="select* from manufacture where Ma=$ma";
     $result=mysqli_query($connect,$sql);
     $item=mysqli_fetch_array($result);
-    $error='';
-    if(isset($_GET['loi'])){
-      $error=$_GET['loi']; 
+
+    if(isset($_SESSION['error'])){
     ?>  
-     <span style="color: red;"> <?php echo $error ?> </span> 
-    <?php  
+     <span style="color: red;"> <?php echo $_SESSION['error'] ?> </span> 
+    <?php   
+       unset($_SESSION['error']);
     } 
     ?>
     
 
   
-<form action="update-process.php" method="POST" >  
+<form action="process.php?action=update" method="POST" >  
    <input type="hidden" name="ma" value="<?php echo $item['Ma'] ?>">
   TEN <input type="text" name="name" value="<?php echo $item['name'] ?>"> 
   PHONE <input type="text" name="phone" value="<?php echo $item['phone'] ?>">

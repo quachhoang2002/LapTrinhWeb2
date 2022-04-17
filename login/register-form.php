@@ -11,7 +11,7 @@
 
     
 
-     <form action="register-proccess.php" method="POST" onsubmit="return validate()"> 
+     <form action="process.php?action=register" method="POST" onsubmit="return validate()"> 
   
 
        Ten <input type="text" name="name" value="<?php if(isset($_SESSION['name']))   

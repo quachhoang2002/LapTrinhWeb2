@@ -36,6 +36,7 @@
               <td>   <?php echo $each['time'] ?>  </td>
               <td>   <?php echo $each['total_price'] ?>  </td>
               <td >   <input type="button" value="approve" onclick="approve( <?php echo $each['id'] ?> )" >  </td>
+              <td> <input type="button" value="Reject" onclick="reject( <?php echo $each['id'] ?> )" >  </td>
          </tr>
 
      <?php } ?>
@@ -45,11 +46,24 @@
 <script type="text/javascript">
     function approve(id){
        $.ajax({
-           url:"OrderApprove.php",
+           url:"OrderApprove_Process.php?action=approve",
            method:"POST",
            data:{id:id},
            success:function(data){
                 alert('da duyet')
+                $('#approve'+id).remove();
+              
+           }
+
+       })
+    } 
+    function reject(id){
+       $.ajax({
+           url:"OrderApprove_Process.php?action=reject",
+           method:"POST",
+           data:{id:id},
+           success:function(data){
+                alert('da huy don')
                 $('#approve'+id).remove();
            }
 

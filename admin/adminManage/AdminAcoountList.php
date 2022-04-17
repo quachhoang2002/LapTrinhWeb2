@@ -61,7 +61,7 @@
 <script  type="text/javascript">
      function block(id){
             $.ajax({
-              url:'AdminBlock.php',
+              url:'process.php?action=admin',
               method:'POST',
               data:{id:id},
               success:function(data){

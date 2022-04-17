@@ -1,3 +1,4 @@
+<?php  session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,16 +14,16 @@
      
      <?php 
 
-   if(isset($_GET['notice'])=='loi'){
-   echo $_GET['notice'];
+   if(isset($_SESSION['error'])){
+   echo $_SESSION['error'];
    }     
-   else if(isset($_GET['notice'])=='succes'){
-      echo $_GET['notice'];
-    }  
+   if(isset($_SESSION['succes'])){
+     echo $_SESSION['succces'];
+   }
    
  
     ?> 
-    <form action="process.php" method="POST" >  
+    <form action="process.php?action=insert" method="POST" >  
   
     TEN <input type="text" name="name" id="name">
     PHONE <input type="text" name="phone">
