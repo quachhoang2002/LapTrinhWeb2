@@ -12,9 +12,10 @@
       $sql="select* from manufacture 
                            ";
       $manufactor=mysqli_query($connect,$sql);
+      $product_type=mysqli_query($connect,"select * from category")
       
     ?>
-    <form action="process.php" method="POST" enctype="multipart/form-data" >
+    <form action="process.php?action=createProduct" method="POST" enctype="multipart/form-data" >
  
     
     Name <input type="text" name="name"> 
@@ -34,13 +35,20 @@
 
        
     </select>
+      <br>
+    <select name="type" id="">
+         <?php foreach($product_type as $each){?>
+      <option value="<?php echo $each['id']?>"> <?php echo $each['Type'] ?> </option>
+          <?php
+         } ?>   
+    </select>
+
     <br>
     <button>submit </button>
        
 
-
-
     </form>
+    <a href="createType.php"> Them the loai</a>
     
 </body>
 </html>

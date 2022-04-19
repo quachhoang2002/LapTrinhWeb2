@@ -18,10 +18,10 @@
 
 
   <button id="sales">  Thong Ke Doanh Thu</button>
-  <table border="1" id="product_statistics">
+  <div  id="product_statistics">
   
 
- </table>
+ </div>
 
 
 
@@ -29,16 +29,17 @@
 
 
 <script type="text/javascript">
-    var date_1= $('input[name=date_1]').val() ;
-    var date_2=$('input[name=date_2]').val() 
-    
-    //set max value for input date
-    $("input[name=date_1]").attr('max',date_2)
-    $("input[name=date_2]").attr('min',date_1)
+ 
 
  
     $("#product_sale").click(function(){
-            $("#product_statistics").load('process.php?action=product_statistics',{})
+          var date_1= $('input[name=date_1]').val() ;
+          var date_2=$('input[name=date_2]').val() 
+          
+          //set max value for input date
+          $("input[name=date_1]").attr('max',date_2)
+          $("input[name=date_2]").attr('min',date_1)
+        $("#product_statistics").load('process.php?action=product_statistics',{time1:date_1,time2:date_2})
     })
   
   

@@ -15,7 +15,7 @@ if(empty($_SESSION['id'])){
  
  
   switch($action){
-     case "insert": 
+     case "addtocart": 
          
          $quantity=$_POST['quantity'] ;
          $name=$_POST['name'] ;
@@ -81,7 +81,7 @@ if(empty($_SESSION['id'])){
           mysqli_close($connect);
           break;
       case "ShowDetail":
-          $id=$_POST['id'];
+           $id=$_POST['id'];
            $result=mysqli_query($connect,"select * from order_detail JOIN product on product.id = order_detail.product_id where order_id=$id");  
            $ouput ='<table border=1>';
             $ouput.=' 
@@ -102,16 +102,12 @@ if(empty($_SESSION['id'])){
             echo $ouput;
             
             break;
+       
 
-        
       default: 
        echo "khong co cai gi dau ";
           
   }  
   
- 
-  
-
-
-
-?>
+?> 
+<script src="index.php"></script>

@@ -18,39 +18,82 @@
     <?php  
     
      require('../connect.php');
-     $sql="select product.*, 
-     manufacture.name as manufacture_name
-     from product 
+     $page=1;
+     if(isset($_GET['page'])){
+      $page =$_GET['page'];     
+     } 
+     $search="";
+     if(isset($_GET['search'])){   
+       $search=$_GET['search'];
+        }  
+     $type="";
+     if(isset($_GET['type'])){   
+       $type=$_GET['type'];
+        }  
+    $product_type=mysqli_query($connect,"select product_type from product");
+
+     $sql = "select count(*)from product  where Name  like '%$search%' and product_type like '%$type%' ";
+     $itemArray= mysqli_query($connect,$sql);
+     $ItemResult= mysqli_fetch_array($itemArray);
+     $TotalItem= $ItemResult['count(*)'];
     
-     join manufacture on manufacture.Ma=product.manufacture_id
-     ";
-     $result=mysqli_query($connect,$sql);
+     $ItemOnPage= 2;
+     $PerPage=ceil($TotalItem/$ItemOnPage);
+     $DropItem=  $ItemOnPage*($page-1);
+    
+  
+     $sql="select*from product 
+     where Name like '%$search%' and product_type like '%$type%'
+     limit $ItemOnPage
+     offset $DropItem; 
+      "  ; 
+
+      $result=mysqli_query($connect,$sql);?>
 
 
-     if(isset($_SESSION['success']) ) {
-      ?> 
-       <span>    
-          <?php 
-          echo $_SESSION['success'] ;
-          unset($_SESSION['success']);
-             ?>
+   <?php
+     if(isset($_SESSION['success']) ) { ?> 
+         <span>    
+            <?php 
+              echo $_SESSION['success'] ;
+              unset($_SESSION['success']);
+            ?>
         </span> 
       <?php }  ?>
 
-                  <span  > <?php   
+       <span  > <?php   
            if(isset($_SESSION['id'])){
            echo $_SESSION['fullname'];
-             ?> <a href="../login/logout.php"> Dang Xuat</a>
-                   
-                   <?php } ?> 
-                   </span> <?php
+             ?> 
+          <a href="../login/logout.php"> Dang Xuat</a>
+             <?php } ?> 
+      </span> 
+    
 
 
-          ?> 
+         <caption>
+           <form action="" >
+              <input type="text" name="search" value="<?php echo $search ?>">
+                <select name="type" id="">
+                       <?php foreach($product_type as  $each){?>
+                         <option value="<?php echo $each['product_type']?>"> <?php echo $each['product_type'] ?> </option>
+                        <?php
+                     } ?>  
+                </select>
+            <button>tim kiem</button>
+           </form>
+         </caption>
+        
+        
+          
+
+       
+         </select>
+
  <div class="container-fluid">
      <a href="cart.php"> Gio Hang</a>
      
-      <table class="table table-bordered " style="border: 2px;" > 
+   <table class="table d-sm-table " style="border: 2px;" > 
         <tr>
             <td>Name</td>
             <td> Price </td>
@@ -61,9 +104,8 @@
         </tr> 
         
         <?php foreach($result as $value) { ?>
-            <form action="" >
-               <tr> 
-            
+      
+            <tr> 
                 <td id="a" ><?php  echo $value['Name'] ?> </td>
                 <td> <?php  echo $value['Price'] ?>   </td>
                 <td> <img height="100px" src=" ../admin/product/photos/<?php  echo $value['Image'] ?>" alt="">  </td>
@@ -73,6 +115,7 @@
                         <br>
                   
                 </td>
+                <td> <a href="ProductDetail.php?id=<?php echo $value['id'] ?>"> Chi Tiet San Pham </a> </td>
              
                 <input type="hidden" name="id" value="<?php echo $value['id'] ?>" id="id_<?php echo $value['id'] ?>">
                 <input type="hidden" name="name" value="<?php echo $value['Name'] ?>" id="name_<?php echo $value['id'] ?>">
@@ -83,12 +126,21 @@
                   <td> <input type="button" class="btn btn-primary text-center " onclick="addtoCart(<?php echo $value['id'] ?>)" value="addtoCart"> </td>
                   <td> <input type="button" onclick="order(<?php echo $value['id'] ?>)" value="order"> </td>
                
-               </tr>  
-             </form>
-            <?php }  ?>
-       </table>
+            </tr>  
+      
+          <?php }  ?>
+      </table>
           
    </div> 
+  
+   <?php  for($i=1;$i<=$PerPage;$i++){ ?>
+           <a href="?page=<?php echo $i ?>&search=<?php echo $search ?>&type=<?php echo $type?>">
+               <button><?php echo $i ?></button>
+            </a> 
+           <?php }
+            mysqli_close($connect) ;
+      ?>
+    
 
  <?php  if(isset($_SESSION['id'])){?>
    <a href="orderStatus.php"> xem don hang</a>  
@@ -113,13 +165,10 @@
           if(quantity!= parseInt(quantity)){
             quantity=$('#quantity_'+id).val(Math.round($('#quantity_'+id).val()))
           }
-          
-      
-
-        }   
+   }   
 
   function addtoCart(id){
-          var product_id= $('#id_'+id).val() ;
+       
           var name= $('#name_'+id).val() ;
           var price= $('#price_'+id).val() ;
           var image= $('#image_'+id).val() ;
@@ -131,9 +180,9 @@
           }
               
         $.ajax({
-             url:"process.php?action=insert",
+             url:"process.php?action=addtocart",
              method:"post",
-             data:{id:product_id,name:name,price:price,image:image,user_id:user_id,quantity:quantity},
+             data:{id:id,name:name,price:price,image:image,user_id:user_id,quantity:quantity},
              success:function(data){
                   alert('them thanh cong')
              }
@@ -141,7 +190,7 @@
       }
      
  function order(id){
-       var product_id= $('#id_'+id).val() ;
+      
           var name= $('#name_'+id).val() ;
           var price= $('#price_'+id).val() ;
           var image= $('#image_'+id).val() ;
@@ -149,9 +198,9 @@
           var quantity=$('#quantity_'+id).val();
      
         $.ajax({
-             url:"process.php?action=insert",
+             url:"process.php?action=addtocart",
              method:"post",
-             data:{id:product_id,name:name,price:price,image:image,user_id:user_id,quantity:quantity},
+             data:{id:id,name:name,price:price,image:image,user_id:user_id,quantity:quantity},
              success:function(data){
               location.href="cart.php"
              }

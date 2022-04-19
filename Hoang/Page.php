@@ -11,36 +11,29 @@
      <div> </div>
       <?php
         require '../connect.php';
-      
-       
       $page=1;
        if(isset($_GET['page'])){
-        $page =$_GET['page'];
-            
+        $page =$_GET['page'];     
        } 
-
        $search="";
        if(isset($_GET['search'])){   
          $search=$_GET['search'];
           }  
-       
        $itemSQL = "select count(*)from test1  where noi_dung  like '%$search%' ";
        $itemArray= mysqli_query($connect,$itemSQL);
        $ItemResult= mysqli_fetch_array($itemArray);
        $TotalPage= $ItemResult['count(*)'];
       
        $ItemOnPage= 1;
-      $PerPage=ceil($TotalPage/$ItemOnPage);
+       $PerPage=ceil($TotalPage/$ItemOnPage);
       
-      $DropItem=  $ItemOnPage*($page-1);
-       
+       $DropItem=  $ItemOnPage*($page-1);
     
-    
-    $sql="select*from test1 
-     where noi_dung  like '%$search%'
-      limit $ItemOnPage
-      offset $DropItem; 
-      "  ; 
+       $sql="select*from test1 
+       where noi_dung  like '%$search%'
+       limit $ItemOnPage
+       offset $DropItem; 
+        "  ; 
       
       
         $result=mysqli_query($connect,$sql);
@@ -89,7 +82,7 @@
      <?php  for($i=1;$i<=$PerPage;$i++){ ?>
                 <a href="?page=<?php echo $i ?>&search=<?php echo $search ?>"> <button><?php echo $i ?></button></a> 
                <?php }  ?>
-               <?php mysqli_close($connect) ?>
+       <?php mysqli_close($connect) ?>
          
                
     
