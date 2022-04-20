@@ -33,6 +33,7 @@
                      $_SESSION['username']=$username;
                      $_SESSION['phone']=$phone;
                      $_SESSION['email']=$email;
+                     
                      exit;
                     } 
            

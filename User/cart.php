@@ -57,7 +57,7 @@
    </table> 
 
   
-   <a href="order.php">Orders</a>
+   <a href="order.php" >Orders</a>
    
  
  <?php }   
@@ -69,7 +69,7 @@
 
   ?>
   <script type="text/javascript">
-  
+   
       function edit_data(id){
      var quantity=$("#quantity_"+id).val()
       
@@ -129,7 +129,7 @@
         } 
          else return false;
          
-     }
+     } 
      
      
   </script>

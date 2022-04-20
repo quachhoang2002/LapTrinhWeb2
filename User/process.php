@@ -34,7 +34,6 @@ if(empty($_SESSION['id'])){
          } 
         else {
              mysqli_query($connect,"update cart set quantity=quantity+$quantity where product_id=$product_id and user_id=$user_id");
-      
          } 
          break;
 
@@ -75,11 +74,13 @@ if(empty($_SESSION['id'])){
           mysqli_query($connect,"delete from cart where user_id='$customer_id' ");
           header("location:index.php");
           break;
+
      case "CancelBill":
           $id=$_POST['id'];
           mysqli_query($connect,"update orders set status=2 where id=$id");
           mysqli_close($connect);
           break;
+
       case "ShowDetail":
            $id=$_POST['id'];
            $result=mysqli_query($connect,"select * from order_detail JOIN product on product.id = order_detail.product_id where order_id=$id");  
@@ -99,10 +100,83 @@ if(empty($_SESSION['id'])){
                  ';
              }   
              $ouput.='</table> <button onclick="remove()">remove</button>';
-            echo $ouput;
-            
+            echo $ouput;           
             break;
-       
+
+       case "Page":
+              require('../connect.php');
+              $page=1;
+              if(isset($_POST['page'])){
+               $page =$_POST['page'];     
+              } 
+              $search="";
+              if(isset($_POST['search'])){   
+                $search=$_POST['search'];
+                 }  
+              $type="";
+              if(isset($_POST['type'])){   
+                $type=$_POST['type'];
+                 }  
+              $user_id="";
+              if(isset($_SESSION['id'])){
+                $user_id=$_SESSION['id'];
+              }
+               $product_type=mysqli_query($connect,"select * from category");
+         
+              $sql = "select count(*)from product  where Name  like '%$search%' and product_type like '%$type%' ";
+              $itemArray= mysqli_query($connect,$sql);
+              $ItemResult= mysqli_fetch_array($itemArray);
+              $TotalItem= $ItemResult['count(*)'];
+             
+              $ItemOnPage= 2;
+              $PerPage=ceil($TotalItem/$ItemOnPage);
+              $DropItem=  $ItemOnPage*($page-1);
+             
+           
+              $sql="select product.* ,category.id as category_id from product
+              join category on product.product_type = category.id
+              where Name like '%$search%' and product_type like '%$type%'
+              limit $ItemOnPage
+              offset $DropItem; 
+               "  ; 
+         
+               $result=mysqli_query($connect,$sql);
+                   $ouput='';
+                 foreach($result as $value) {
+                  $ouput.= '
+                    <div> 
+                        <div>'.$value['Name'].'</div>
+                        <div>'.$value['Price'].'</div>
+                        <div> <img height="100px" src=" ../admin/product/photos/'.$value['Image'].'" alt="">  </div>
+                        <div> 
+                               <br>
+                         <input type="number" value="1" name="quantity" min="1" max="50"    id="quantity_'.$value['id'].'"  onchange="checkvalue('.$value['id'].')" > 
+                                <br>
+                          
+                        </div>
+                        <td> <a href="ProductDetail.php?id='.$value['id'].'"> Chi Tiet San Pham </a> </td>
+                     
+                        <input type="hidden" name="id" value="'.$value['id'].' " id="id_'.$value['id'].'">
+                        <input type="hidden" name="name" value="'.$value['Name'].'" id="name_'.$value['id'].'">
+                        <input type="hidden" name="price" value="'.$value['Price'].'" id="price_'.$value['id'].'">
+                        <input type="hidden" name="image" value="'.$value['Image'].'" id="image_'.$value['id'].'" >
+                        <input type="hidden" name="user_id" value="'.$user_id.'" id="userID_'.$value['id'].'">
+                        
+                          <td> <input type="button" class="btn btn-primary text-center" onclick="addtoCart('.$value['id'].')" value="addtoCart"> </td>
+                          <td> <input type="button" onclick="order('.$value['id'].')" value="order"> </td>
+                       
+                    </div>  
+                  ' ;
+                 } ; 
+                 for($i=1;$i<=$PerPage;$i++){
+                  $ouput.= '<button onclick="PageNumber('.$i.')">'.$i.'</button>';
+                  };
+                 echo $ouput;               
+                 break;
+
+  
+  
+
 
       default: 
        echo "khong co cai gi dau ";
@@ -110,4 +184,3 @@ if(empty($_SESSION['id'])){
   }  
   
 ?> 
-<script src="index.php"></script>

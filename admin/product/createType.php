@@ -12,6 +12,7 @@
            <input type="text" name="type" > 
            <button>Add</button>   
      </form>
-    
-</body>
-</html>
+
+</body> 
+</html> 
+

@@ -20,7 +20,7 @@ if(isset($_COOKIE['remember'])){
     $_SESSION['id'] = $row['id'];
     $_SESSION['fullname']=$row['fullname'];
     header('location:../User');
-  
+    
 
 }
 

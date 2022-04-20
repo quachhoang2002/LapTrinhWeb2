@@ -73,7 +73,7 @@
        
   
        function validate(){
-          
+        
         var name= document.getElementsByName('name')[0].value;
         var username= document.getElementsByName('Username')[0].value;
         var phone=document.getElementsByName('phone')[0].value

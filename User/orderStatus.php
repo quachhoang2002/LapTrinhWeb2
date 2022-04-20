@@ -63,7 +63,7 @@ session_start();
         
       </table> 
 
-      <div  id="load" style="display:none;">
+      <div  id="load"  style="display:none;">
          
         
       </div>
