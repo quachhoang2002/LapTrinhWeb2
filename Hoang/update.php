@@ -14,13 +14,10 @@ $sql="update test1
         
         ";
 
-
-
-
- if(mysqli_query($connect,$sql)){
-     header('location:Page.php');
- } 
- {
-    header('location:Page.php');
- }
-mysqli_close($connect);
+     if(mysqli_query($connect,$sql)){
+         header('location:Page.php');
+     } 
+     {
+        header('location:Page.php');
+     }
+    mysqli_close($connect);

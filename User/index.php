@@ -21,7 +21,7 @@
    
    <?php
      if(isset($_SESSION['success']) ) { ?> 
-         <span>    
+         <span >    
             <?php 
               echo $_SESSION['success'] ;
               unset($_SESSION['success']);
@@ -41,29 +41,25 @@
 
          <caption>
          
-              <input type="text" name="search" value="">
-                <select name="type" id="">
+         <input type="text" name="search" value="">
+           <select name="type" id="">
                        <option value=""> All </option>
                        <?php foreach($product_type as  $each){?>
                         
                          <option value="<?php echo $each['id']?>"> <?php echo $each['Type'] ?> </option>
                         <?php
                      } ?>  
-                </select>
+               </select>
             <button onclick="filter()">tim kiem</button>
          
          </caption>
-         
-        
-          
-
+   
        
-         </select>
 
  <div class="container-fluid">
      <a href="cart.php"> Gio Hang</a>
      
-     <div id="loadPage"> </div>
+     <div id="loadPage" > </div>
           
    </div> 
   
@@ -86,6 +82,7 @@
 
 </body>  
 <script type="text/javascript">
+    
     function PageNumber(page){
       var search=  $('input[name=search]').val();
       var type= $('select[name=type]').val();
@@ -99,7 +96,7 @@
       $('#loadPage').load('process.php?action=Page',{search:search,type:type})
    }
    
-  $('#loadPage').load('process.php?action=Page',)
+  $('#loadPage').load('process.php?action=Page')
   
 
    function checkvalue(id){

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="../../jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <?php 
@@ -34,12 +35,35 @@
         <td> <img height="100px" src=" photos/<?php  echo $value['Image'] ?>" alt="">  </td>
         <td> <?php  echo $value['description'] ?> </td>
         <td><?php  echo $value['name'] ?>  </td>
-         <td>Change</td>
-         <td>Delete</td>
+         <td>  <input type="button" value="sua" onclick="Update(<?php echo $value['id']?>)" ></td>
+         <td >  <input type="button" value="xoa"onclick="Delete(<?php echo $value['id']?>)"> </td>
+         
       </tr> 
    
 
    <?php }   ?>
      </table>
-</body>
+    <div id="update">
+
+    </div>
+
+</body> 
+   <script type="text/javascript">
+        function Delete(id){
+                  $.ajax({
+                    url:'process.php?action=delete',
+                    method:'POST',
+                    data:{id:id },
+                    success:function(data){
+                      alert('xoa thanh cong ')
+                    }
+
+                  })
+                }
+        function Update(id){
+             $('#update').load('update-form.php',{id:id})
+
+        }
+     
+   </script>
 </html> 

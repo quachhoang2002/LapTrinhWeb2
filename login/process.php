@@ -64,8 +64,8 @@
 
           
       case 'login':
-                  $username=$_POST['username'];
-                  $password=$_POST['password'];
+                  $username=mysqli_real_escape_string(($connect), $_POST['username']);
+                  $password=mysqli_real_escape_string(($connect), $_POST['password']);
    
                   if(isset($_POST['remember'])){
                      $remember= true;

@@ -4,11 +4,6 @@
 session_start() ;
    
 
-
-if(empty($_SESSION['id'])){
-  header('location:../login/login-form.php');
-  exit;
- }
  require('../connect.php');
  $action=$_GET['action'];
 
@@ -16,7 +11,10 @@ if(empty($_SESSION['id'])){
  
   switch($action){
      case "addtocart": 
-         
+          if(empty($_SESSION['id'])){
+            header('location:../login/login-form.php');
+            exit;
+           }
          $quantity=$_POST['quantity'] ;
          $name=$_POST['name'] ;
          $price=$_POST['price'] ;
@@ -39,7 +37,6 @@ if(empty($_SESSION['id'])){
 
      case "delete":
          $id=$_POST['id'];
-         require('../connect.php'); 
          mysqli_query($connect,"delete from cart where id=$id") ; 
          break;
 
@@ -52,6 +49,10 @@ if(empty($_SESSION['id'])){
           break;
      
      case "order":
+          if(empty($_SESSION['id'])){
+            header('location:../login/login-form.php');
+            exit;
+           }
           $name=$_POST['name'];
           $address=$_POST['address'];
           $phone=$_POST['phone'];
@@ -104,7 +105,7 @@ if(empty($_SESSION['id'])){
             break;
 
        case "Page":
-              require('../connect.php');
+             
               $page=1;
               if(isset($_POST['page'])){
                $page =$_POST['page'];     
@@ -121,7 +122,6 @@ if(empty($_SESSION['id'])){
               if(isset($_SESSION['id'])){
                 $user_id=$_SESSION['id'];
               }
-               $product_type=mysqli_query($connect,"select * from category");
          
               $sql = "select count(*)from product  where Name  like '%$search%' and product_type like '%$type%' ";
               $itemArray= mysqli_query($connect,$sql);
@@ -173,9 +173,6 @@ if(empty($_SESSION['id'])){
                   };
                  echo $ouput;               
                  break;
-
-  
-  
 
 
       default: 

@@ -28,7 +28,7 @@ session_start();
                <td>Tinh Trang</td>
            </tr>
           <?php foreach($result as $each){?>
-                                  
+                              
                  <tr> 
                     <td><?php echo $each['id'] ?></td>
                     <td><?php  echo $each['name_receiver'] ?></td>
@@ -58,7 +58,7 @@ session_start();
                     </td>
                     
                  </tr>
-
+              
             <?php }  ?>
         
       </table> 
@@ -69,7 +69,7 @@ session_start();
       </div>
 </body>
 <script type="text/javascript">
-         function cancel(id){
+        function cancel(id){
             $.ajax({
                 url:'process.php?action=CancelBill',
                 method:'post',
@@ -87,9 +87,9 @@ session_start();
            })
           
         } 
-      function remove(){
-         $('#load').hide();
-      }
+        function remove(){
+           $('#load').hide();
+        }
         
 </script>
 </html> 
