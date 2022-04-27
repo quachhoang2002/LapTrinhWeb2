@@ -3,9 +3,7 @@
            if(!isset($_SESSION['level'])){
             header('location:../../admin-login/adminLogin-form.php');
                      
-           } 
-        
-       
+           }     
  
 ?>
 <!DOCTYPE html>
@@ -22,7 +20,7 @@
 
 
     <?php 
- 
+  
     
    if(isset($_SESSION['success']) ) {
    ?> 
@@ -77,7 +75,7 @@
      ?>
     </table>
 
-
+ 
 </body> 
 <script> 
       

@@ -1,3 +1,10 @@
+<?php session_start();
+       
+       if(!isset($_SESSION['level'])){
+        header('location:../../admin-login/adminLogin-form.php');
+                 
+       } 
+   ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

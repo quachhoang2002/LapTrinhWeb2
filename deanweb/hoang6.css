@@ -865,7 +865,7 @@ textarea{
     background-color: lavenderblush;
     font-size: 20px;
 }
-.productbox,.productbox1{
+.productbox{
     width: max-content;
     display: inline-flex;
     margin-left: 6%;

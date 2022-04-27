@@ -31,10 +31,9 @@
          <?php foreach($manufactor as $manufacture){?>
       <option value="<?php echo $manufacture['Ma']?>"> <?php echo $manufacture['name'] ?> </option>
           <?php
-         } ?>   
-
-       
+         } ?>      
     </select>
+    
       <br>
     <select name="type" id="">
          <?php foreach($product_type as $each){?>

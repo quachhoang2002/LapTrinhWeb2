@@ -1,12 +1,12 @@
 <?php  session_start() ;
-      if(empty($_SESSION['level'])) {
+      if(!isset($_SESSION['level']) ) {
       header('location:../../admin-login/adminLogin-form.php');
         exit;
         
       } 
       if(($_SESSION['level'])!=1){
           echo "ban khong co quyen truy cap ";
-
+           exit;
       }
 
 ?>
@@ -44,8 +44,9 @@
                 <td> <?php echo $each['phone_number'] ?> </td>
                 <td> <?php echo $each['username'] ?> </td>
                 <td>  <input type="button" value="Khoa tai khoan"  id="block_btn<?php echo $each['id'] ?>"  onclick="block(<?php echo $each['id'] ?>)"  <?php if($each['status']==1){ ?>   disabled  <?php } ?> >
-                <td>sua</td>
-                <td>xoa</td>
+               <?php  if (isset($_SESSION['level']) && $_SESSION['level']==1 ) { ?>
+               <td><input type="button" value="sua" onclick="update(<?php echo $each['id'] ?>)" ></td>
+               <?php } ?>
 
                  
         </tr>
@@ -71,7 +72,8 @@
               
             })
      }         
-       
+      
+     
   
           
 

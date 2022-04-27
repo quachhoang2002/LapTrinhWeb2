@@ -41,10 +41,7 @@
                 <td> <?php echo $each['username'] ?> </td>
                 <td> <?php echo $each['email'] ?> </td>
                  <td>  <input type="button" value="Khoa tai khoan"  id="block_btn<?php echo $each['id'] ?>"  onclick="block(<?php echo $each['id'] ?>)"  <?php if($each['status']==1){ ?>   disabled  <?php } ?> >   </td> 
-                 <?php if (isset($_SESSION['level']) && $_SESSION['level']==1 ) {?>
-                                <td >Sua</td>
-                                <td>Xoa</td>
-               <?php  } ?>
+                 
         </tr>
               
       <?php  } ?>
@@ -52,7 +49,12 @@
       
      
     </table>
- 
+    
+      <div id="update"> 
+        
+      </div>
+
+    
 
 </body> 
 <script  type="text/javascript">
@@ -68,7 +70,7 @@
               
             })
      }         
-       
+   
   
           
 

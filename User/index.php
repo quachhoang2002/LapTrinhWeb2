@@ -10,10 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../bootstrap-5.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="font/themify-icons/themify-icons.css">
     <script src="../bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
     <script   src="../jquery-3.6.0.min.js"></script>
 </head>
-<body>
+<body >
     <?php   
        require '../connect.php';
        $product_type=mysqli_query($connect,"select * from category");  
@@ -37,7 +39,7 @@
              <?php } ?> 
       </span> 
     
-
+     <?php require_once '../header.php' ?>
 
          <caption>
          
@@ -56,7 +58,7 @@
    
        
 
- <div class="container-fluid">
+ <div class="container-fluid" style="height: 1000px;">
      <a href="cart.php"> Gio Hang</a>
      
      <div id="loadPage" > </div>
