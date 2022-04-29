@@ -2,6 +2,11 @@
 <?php 
 session_start();
      require '../connect.php';
+     if(empty($_SESSION['id'])){
+      header('location:../login/login-form.php');
+      exit;
+     }
+
      $id=$_SESSION['id'];
      $result=mysqli_query($connect,"select *from orders where customer_id=$id ");
 
