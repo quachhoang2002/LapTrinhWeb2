@@ -11,34 +11,40 @@
     </div>    
     
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top  " >
-       <div class="container justify-content-betweenr">
+       <div class="container">
 
-         <a class="navbar-brand me-5 " href="#"> 
-             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFclcvdGHc2PKfZsg3XZ5RW61b5v5PFfixjmXZQz1uvwItuGHfvMXMRG-voTcFOORV3aA&usqp=CAU" alt="" srcset="" style="height: 50px;"> 
+         <a class="navbar-brand " href="#"> 
+             <img src="https://s2.coinmarketcap.com/static/img/coins/200x200/10407.png " class="" alt="" srcset="" style="height: 50px;"> 
          </a>
 
           <div class="navbar nav ">
              <ul class="navbar-nav ms-auto">
-                 <li class="navbar-item me-5">
-                     <a href="" class="nav-item"> Trang Chu </a>
+                 <li class="navbar-item  ">
+                     <a href="" class="nav-link"> Trang Chu </a>
                 </li>
 
-                 <li class="navbar-item me-5">
-                     <a href="" class="nav-item"> San Pham  </a>
+                 <li class="navbar-item  ">
+                     <a href="" class="nav-link"> San Pham  </a>
                 </li>
 
-                 <li class="navbar-item me-5">
-                     <a href="" class="nav-item"> Lien He   </a>
+                 <li class="navbar-item  ">
+                     <a href="" class="nav-link"> Lien He   </a>
                  </li>         
              </ul>
              
          </div>
-            
-                 <li class="navbar-items">
-                     <a href="cart.php" class="nav-item text-decoration-none "> Gio Hang <i class="ti-shopping-cart"></i>  </a>
-                 </li>  
+    
+         <div class="navbar-items">
+             <a href="cart.php" class="nav-item text-decoration-none "> Gio Hang <i class="ti-shopping-cart"></i>  </a>
+         </div>  
          
        </div>
      </nav>
 
+
+    
+
+      
+
+     
  

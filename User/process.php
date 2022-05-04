@@ -128,7 +128,7 @@ session_start() ;
               $ItemResult= mysqli_fetch_array($itemArray);
               $TotalItem= $ItemResult['count(*)'];
              
-              $ItemOnPage= 2;
+              $ItemOnPage= 4;
               $PerPage=ceil($TotalItem/$ItemOnPage);
               $DropItem=  $ItemOnPage*($page-1);
              
@@ -144,33 +144,42 @@ session_start() ;
                    $ouput='';
                  foreach($result as $value) {
                   $ouput.= '
-                    <div> 
-                        <div>'.$value['Name'].'</div>
-                        <div>'.$value['Price'].'</div>
-                        <div> <img height="100px" src=" ../admin/product/photos/'.$value['Image'].'" alt="">  </div>
-                        <div> 
-                               <br>
-                         <input type="number" value="1" name="quantity" min="1" max="50"    id="quantity_'.$value['id'].'"  onchange="checkvalue('.$value['id'].')" > 
-                                <br>
-                          
-                        </div>
-                        <td> <a href="ProductDetail.php?id='.$value['id'].'"> Chi Tiet San Pham </a> </td>
-                     
-                        <input type="hidden" name="id" value="'.$value['id'].' " id="id_'.$value['id'].'">
-                        <input type="hidden" name="name" value="'.$value['Name'].'" id="name_'.$value['id'].'">
-                        <input type="hidden" name="price" value="'.$value['Price'].'" id="price_'.$value['id'].'">
-                        <input type="hidden" name="image" value="'.$value['Image'].'" id="image_'.$value['id'].'" >
-                        <input type="hidden" name="user_id" value="'.$user_id.'" id="userID_'.$value['id'].'">
-                        
-                          <td> <input type="button" class="btn btn-primary text-center" onclick="addtoCart('.$value['id'].')" value="addtoCart"> </td>
-                          <td> <input type="button" onclick="order('.$value['id'].')" value="order"> </td>
+                  <div class="col-4 mb-5 d-flex justify-content-center "  >  
+                    <div class="card align-items-center" style="width:200px"> 
+                       <div class="card-img" > <img height="100px" style="width: 100%;" src=" ../admin/product/photos/'.$value['Image'].'" alt="" >  </div>
+                       <div class="card-body">
+                           <div class="card-title"> <h5>'.$value['Name'].'</h5></div>
+                           <div class="card-text">'.$value['Price'].'</div>               
+                           <div class="card-text"> 
+                                  <br>
+                            <input type="number" value="1" name="quantity" min="1" max="50"    id="quantity_'.$value['id'].'"  onchange="checkvalue('.$value['id'].')" > 
+                                   <br>
+                             
+                           </div>
+                           <div> <a href="ProductDetail.php?id='.$value['id'].'"> Chi Tiet San Pham </a> </div>                           
+                       </div>
+                       <div> <input type="button" class="btn btn-primary text-center" onclick="addtoCart('.$value['id'].')" value="addtoCart"> </div>
+                       <div> <input type="button" onclick="order('.$value['id'].')" value="order"> </div>
+                    
+                       <input type="hidden" name="id" value="'.$value['id'].' " id="id_'.$value['id'].'">
+                       <input type="hidden" name="name" value="'.$value['Name'].'" id="name_'.$value['id'].'">
+                       <input type="hidden" name="price" value="'.$value['Price'].'" id="price_'.$value['id'].'">
+                       <input type="hidden" name="image" value="'.$value['Image'].'" id="image_'.$value['id'].'" >
+                       <input type="hidden" name="user_id" value="'.$user_id.'" id="userID_'.$value['id'].'">
                        
-                    </div>  
+                  
+                 
+                   </div>  
+                 </div>
                   ' ;
                  } ; 
+                  
+                 $ouput.='<div class="row"> </div>';
+                  
                  for($i=1;$i<=$PerPage;$i++){
-                  $ouput.= '<button onclick="PageNumber('.$i.')">'.$i.'</button>';
+                  $ouput.= ' <button onclick="PageNumber('.$i.')">'.$i.'</button>';
                   };
+                  
                  echo $ouput;               
                  break;
 

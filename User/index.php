@@ -41,6 +41,38 @@
     
      <?php require_once '../header.php' ?>
 
+
+<div class="body">
+  <div class="container-fluid bg-light   " >
+
+     <div class="row">
+           <div class="text-center" style="font-size: 50px;color:bisque"> KKH SHOP  </div>            
+     </div>
+    
+    
+      <div class="row d-flex   ">
+          <div class="col-2 ">
+                <div>A</div>
+                <div>B</div>
+                <div>c</div>
+           </div>
+       
+          <div class="col-10  ">
+            <div class="row d-flex " id="loadPage">
+              
+                
+            
+            </div>         
+          </div>
+  
+       </div>
+   </div> 
+
+</div>
+
+
+
+     
          <caption>
          
          <input type="text" name="search" value="">
@@ -58,6 +90,9 @@
    
        
 
+
+
+         
  <div class="container-fluid" style="height: 1000px;">
      <a href="cart.php"> Gio Hang</a>
      
@@ -65,9 +100,7 @@
           
    </div> 
   
-   <div id="pagination">
-
-   </div>
+   
     
 
  <?php  if(isset($_SESSION['id'])){?>
@@ -89,6 +122,7 @@
       var search=  $('input[name=search]').val();
       var type= $('select[name=type]').val();
       $('#loadPage').load('process.php?action=Page',{page:page,search:search,type:type})
+      location.href="#"
     }
 
    function filter(){
