@@ -43,7 +43,7 @@
 
 
 <div class="body">
-  <div class="container-fluid bg-light   " >
+  <div class="container-fluid background" >
 
      <div class="row">
            <div class="text-center" style="font-size: 50px;color:bisque"> KKH SHOP  </div>            
@@ -57,7 +57,7 @@
                 <div>c</div>
            </div>
        
-          <div class="col-10  ">
+          <div class="col-8 ">
             <div class="row d-flex " id="loadPage">
               
                 

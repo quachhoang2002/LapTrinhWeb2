@@ -128,7 +128,7 @@ session_start() ;
               $ItemResult= mysqli_fetch_array($itemArray);
               $TotalItem= $ItemResult['count(*)'];
              
-              $ItemOnPage= 4;
+              $ItemOnPage= 8;
               $PerPage=ceil($TotalItem/$ItemOnPage);
               $DropItem=  $ItemOnPage*($page-1);
              
@@ -144,18 +144,16 @@ session_start() ;
                    $ouput='';
                  foreach($result as $value) {
                   $ouput.= '
-                  <div class="col-4 mb-5 d-flex justify-content-center "  >  
+                  <div class="col-3 mb-5 mt-5 d-flex justify-content-center "  >  
                     <div class="card align-items-center" style="width:200px"> 
                        <div class="card-img" > <img height="100px" style="width: 100%;" src=" ../admin/product/photos/'.$value['Image'].'" alt="" >  </div>
-                       <div class="card-body">
+                       <div class="card-body text-center">
                            <div class="card-title"> <h5>'.$value['Name'].'</h5></div>
                            <div class="card-text">'.$value['Price'].'</div>               
-                           <div class="card-text"> 
-                                  <br>
-                            <input type="number" value="1" name="quantity" min="1" max="50"    id="quantity_'.$value['id'].'"  onchange="checkvalue('.$value['id'].')" > 
-                                   <br>
-                             
+                           <div class="card-text">                             
+                             <input type="number" value="1" name="quantity" min="1" max="50"    id="quantity_'.$value['id'].'"  onchange="checkvalue('.$value['id'].')" >                                              
                            </div>
+
                            <div> <a href="ProductDetail.php?id='.$value['id'].'"> Chi Tiet San Pham </a> </div>                           
                        </div>
                        <div> <input type="button" class="btn btn-primary text-center" onclick="addtoCart('.$value['id'].')" value="addtoCart"> </div>
@@ -175,11 +173,15 @@ session_start() ;
                  } ; 
                   
                  $ouput.='<div class="row"> </div>';
-                  
+                 $ouput.='<nav aria-label="Page navigation example ">
+                            <ul class="pagination justify-content-center">';
                  for($i=1;$i<=$PerPage;$i++){
-                  $ouput.= ' <button onclick="PageNumber('.$i.')">'.$i.'</button>';
+                  $ouput.= '  <li class="page-item"> <button onclick="PageNumber('.$i.')" class="page-link">'.$i.'</button></li>
+                         ';
                   };
-                  
+
+                 $ouput.='  </ul>
+                          </nav>';
                  echo $ouput;               
                  break;
 

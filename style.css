@@ -4,3 +4,7 @@
 .header{
      background-image: linear-gradient(rgb(208, 206, 206),rgb(241, 235, 235)) ;
 }
+.background{
+     background-image: url('https://st3.depositphotos.com/13349494/16548/i/1600/depositphotos_165484202-stock-photo-sweet-bakery-background.jpg');
+     background-size: cover;
+}
