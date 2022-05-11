@@ -6,9 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+    <link rel="stylesheet" href="../bootstrap-5.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="font/themify-icons/themify-icons.css">
+    <script src="../bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
     <script   src="../jquery-3.6.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
 </head>
 
 <body> 
@@ -26,6 +29,7 @@
        $total=mysqli_fetch_array($result_total)['tong'];
      
   ?>  
+  <?php require 'header.php' ?>
   <a href="index.php"> Mua Hang</a>
   <?php if ($row>=1){ ?>
         
@@ -44,7 +48,7 @@
                   <td> <img src=" ../admin/product/photos/<?php echo $each['image'] ?> " alt="" height="100px">  </td>
                   <td> <?php echo $each['product_name'] ?> </td>
                   <td id="price<?php echo $each['id'] ?>">  <?php echo $each['price'] ?> </td>
-                  <td > <input type="number" id="quantity_<?php echo $each['id']?>" min="0"  style="text-align:center"  pattern="[1-30]*" onchange="edit_data(<?php echo $each['id']?>)"  value="<?php echo $each['quantity']?>" > </td>
+                  <td > <input type="number" id="quantity_<?php echo $each['id']?>" min="0"  style="text-align:center"  onkeypress="check(event)" onchange="edit_data(<?php echo $each['id']?>)"  value="<?php echo $each['quantity']?>" > </td>
                   <td id="temp<?php echo $each['id'] ?>" class="temp" >  <?php echo $each['price']*$each['quantity'] ?>  </td>
                  <td> <input type="button" value="xoa" onclick="delete_data(<?php  echo $each['id'] ?>)"> </td>
           </tr>
@@ -61,19 +65,25 @@
    
  
  <?php }   
-  
-       else echo "chua co san pham ";
-       
-       
-      
-
+     else echo "chua co san pham ";
   ?>
+
+   <?php require 'footer.php' ?>
+
+
   <script type="text/javascript">
-   
+
+    function check(event) {
+      var x = event.charCode || event.keyCode;
+      if (x <48 || x > 57) {  
+         event.preventDefault()
+      }
+    }
+
       function edit_data(id){
      var quantity=$("#quantity_"+id).val()
       
-        if(quantity<=0){ 
+      if(quantity<=0){ 
           if(confirm('ban muon xoa chu')==false){
            location.reload()
             return false
@@ -81,13 +91,10 @@
             $('#temp'+id).parent().remove();}
           
        } 
-
        if(quantity!= parseInt(quantity)){
         window.location.reload() 
         return false
        }   
-
-      
 
        $.ajax({
             url:"process.php?action=update",
@@ -110,7 +117,6 @@
              
               $('#total').html('Tong Tien :'+total);
            }
-
          }) 
    
      }  

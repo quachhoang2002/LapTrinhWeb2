@@ -144,9 +144,9 @@ session_start() ;
                    $ouput='';
                  foreach($result as $value) {
                   $ouput.= '
-                  <div class="col-3 mb-5 mt-5 d-flex justify-content-center "  >  
-                    <div class="card align-items-center" style="width:200px"> 
-                       <div class="card-img" > <img height="100px" style="width: 100%;" src=" ../admin/product/photos/'.$value['Image'].'" alt="" >  </div>
+                  <div class="col-3 mb-5 mt-5 d-flex justify-content-center "   >  
+                    <div class="card align-items-center" style="width:200px ;width:250px; box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);"> 
+                       <div class="card-img" > <img height="200px" style="width: 100%;" src=" ../admin/product/photos/'.$value['Image'].'" alt="" >  </div>
                        <div class="card-body text-center">
                            <div class="card-title"> <h5>'.$value['Name'].'</h5></div>
                            <div class="card-text">'.$value['Price'].'</div>               
@@ -164,8 +164,7 @@ session_start() ;
                        <input type="hidden" name="price" value="'.$value['Price'].'" id="price_'.$value['id'].'">
                        <input type="hidden" name="image" value="'.$value['Image'].'" id="image_'.$value['id'].'" >
                        <input type="hidden" name="user_id" value="'.$user_id.'" id="userID_'.$value['id'].'">
-                       
-                  
+                                         
                  
                    </div>  
                  </div>

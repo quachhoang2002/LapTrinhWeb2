@@ -4,9 +4,20 @@
           <li class="nav-item">
             <a class="nav-link" href="orderStatus.php">Xem Don Hang <i class="ti-notepad"></i> </a>
           </li>    
+
+          <li class="nav-item">        
+                <?php if(isset($_SESSION['id'])) : ?>
+                <a href="" class="nav-link"> <?php  echo $_SESSION['fullname']; ?> </a>
+          </li>    
+          <li class="nav-item">         
+               <a class="nav-link" href="../login/logout.php"> Dang Xuat</a>
+          </li>  
+                 <?php  else : ?>
+         
           <li class="nav-item">
             <a class="nav-link" href="#">Tai Khoan <i class="ti-user"></i></a>
           </li>
+              <?php  endif ?>
         </ul>         
     </div>    
     
@@ -20,15 +31,15 @@
           <div class="navbar nav ">
              <ul class="navbar-nav ms-auto">
                  <li class="navbar-item  ">
-                     <a href="" class="nav-link"> Trang Chu </a>
+                     <a href="index.php" class="nav-link"> Trang Chu </a>
                 </li>
 
                  <li class="navbar-item  ">
-                     <a href="" class="nav-link"> San Pham  </a>
+                     <a href="page.php" class="nav-link"> San Pham  </a>
                 </li>
 
                  <li class="navbar-item  ">
-                     <a href="" class="nav-link"> Lien He   </a>
+                     <a href="contract.php" class="nav-link"> Lien He   </a>
                  </li>         
              </ul>
              
