@@ -28,10 +28,10 @@
 
 
 
-  <div class="container-fluid pb-5 " style="background-color: #9da2a7">
+  <div class="container-fluid pb-5 " style="background-color: var(--bs-gray-400)">
 
      <div class="row">
-           <div class="text-center mt-5" style="font-size: 50px;color:bisque"> KKH SHOP  </div>            
+           <div class="text-center mt-5 mb-5 fw-bolder" style="font-size: 50px;color:#403019"> KKH SHOP  </div>            
      </div>
     
     
@@ -51,8 +51,7 @@
        
           <div class="col-8 " style="background-color:whitesmoke ;">
             <div class="row d-flex " id="loadPage">
-              
-                
+               
             
             </div>         
           </div>
@@ -82,7 +81,12 @@
    }
 
   $('#loadPage').load('process.php?action=Page')
-  
+    function check(event) {
+      var x = event.charCode || event.keyCode;
+      if (x <48 || x > 57) {  
+         event.preventDefault()
+      }
+    }
 
    function checkvalue(id){
         var quantity=$('#quantity_'+id).val();

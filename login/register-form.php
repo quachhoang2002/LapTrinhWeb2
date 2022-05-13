@@ -6,67 +6,112 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../bootstrap-5.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="font/themify-icons/themify-icons.css">
+    <script src="../bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+    <script   src="../jquery-3.6.0.min.js"></script>
 </head>
 <body>  
 
-    
+<header style="background-color: #edfafd;height:75px;" class="container-fluid d-flex justify-content-around  ">
+   <a href="../User/" class="align-self-center text-decoration-none" style="font-size:35px;color:#403019"> KKH Shop</a>
+   <a href="" class="align-self-center text-decoration-none" style="color:#403019"> Ban Can Giup Do ?</a>    
+</header>
 
-     <form action="process.php?action=register" method="POST" onsubmit="return validate()"> 
-  
+<section class="vh-50 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
 
-       Ten <input type="text" name="name" value="<?php if(isset($_SESSION['name']))   
-                echo $_SESSION['name'];
-                unset($_SESSION['name']);  ?>">
-       <span id="errorName"> </span>
-      <br>
+            <form action="process.php?action=register" method="POST"  onsubmit="return validate()" >
+              <div class="row">
+                <div class="col-md-8 mb-4">
+                  <div class="form-outline">
+                     <label class="form-label" >Ho Ten</label>
+                     <input type="text" class="form-control " name="name"  value="<?php if(isset($_SESSION['name']))   
+                      echo $_SESSION['name'];
+                      unset($_SESSION['name']); ?>" pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"  required>
+                         <span class="text-danger" id="errorName"> </span>
+                  </div>
+                </div>
+              </div>
 
+              <div class="row">
+                <div class="col-md-8 mb-4">
+                  <div class="form-outline">
+                     <label class="form-label" >Ten Dang Nhap</label>
+                     <input type="text" class="form-control " name="Username" pattern=".{5,}" title="it nhat 5 ky tu" value="<?php if(isset($_SESSION['username']))   
+                      echo $_SESSION['username'];
+                      unset($_SESSION['username']);  ?>" required>
+                         <span class="text-danger" id="errorUserName"> </span>
+                  </div>
+                </div>
+              </div>
 
-       Ten Dang Nhap <input type="text" name="Username" value="<?php if(isset($_SESSION['username']))   
-                 echo $_SESSION['username'];
-                unset($_SESSION['username']);?>">
-                  
-               
-      <span id="errorUserName" > </span>
+              <div class="row">
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+                  <div class="form-outline datepicker w-100">
+                    <label class="form-label">Mat Khau</label>
+                    <input type="password" class="form-control " name="password-1" title="can it nhat 1 chu so , 1 chu in hoa ,1 chu in thuong va do dai it nhat la 8"
+                                                                                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                         <span  class="text-danger" class="errorPw"> </span>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline datepicker w-100">
+                    <label class="form-label">Nhap lai mat khau</label>
+                    <input type="password" class="form-control " name="password-2" required >
+                         <span class="text-danger"  class="errorPw"> </span>
+                  </div>
+                </div>
+              </div>
 
-       <br>
-        
-        So Dien Thoai <input type="text" name="phone" value="<?php if(isset($_SESSION['phone']))   
-                echo $_SESSION['phone'];
-                unset($_SESSION['phone']); ?>"> 
-           <span id="errorPhone"> </span>
+              <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                    <label class="form-label" >Email</label>
+                    <input type="email" class="form-control " name="email" value="<?php if(isset($_SESSION['email']))   
+                      echo $_SESSION['email'];
+                      unset($_SESSION['email']);  ?>"   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                         <span class="text-danger" id="errorEmail"> </span>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                     <label class="form-label" >Phone Number</label>
+                     <input type="text" class="form-control " name="phone" value="<?php if(isset($_SESSION['phone']))   
+                      echo $_SESSION['phone'];
+                      unset($_SESSION['phone']);  ?>"  pattern="[0]{1}[0-9]{9}"   title="Phai bat dau bang so 0" required>
+                         <span class="text-danger" id="errorPhone"> </span>
+                  </div>
+                </div>
+              </div> 
+                         <?php  if(isset($_SESSION['error'])) : ?>  
+                      <span class="text-danger text-center">  <?php echo $_SESSION['error'];   
+                              unset($_SESSION['error']); ?> 
+                      </span> 
+                           <?php endif  ?> 
+                  <span class="text-danger text-center" id="errorPW"></span>
+                 <div class="d-flex justify-content-center">
+                   <button   class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                </div>              
+            </form>
+            
+                
+                 <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="login-form.php"
+                    class="fw-bold text-body"><u>Login here</u></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-       
-       <br>
-
-       Mat Khau <input type="password" name="password-1" id="password-1">
-       <span class="errorPw"> </span>
-       <br>
-         
-       Nhap lai mat khau <input type="password" name="password-2" id="password-2">
-       <span class="errorPw"> </span>
-       <br>
-
-       Email <input type="email" name="email" value="<?php if(isset($_SESSION['email']))   
-                echo $_SESSION['email'];
-                unset($_SESSION['email']); ?>" >  
-       <span id="errorEmail"> </span>
-
-       <br>
-       
-       <?php   if(isset($_SESSION['error']))   
-                echo $_SESSION['error'];
-                unset($_SESSION['error']);
-        ?> 
-       
-       <br>
-       
-        <button >Dang ky</button>
-
-        <span id="errorVPW"></span>
-      
-     
-    </form>    
- <a href="login-form.php">Dang Nhap</a>
+<?php require '../User/footer.php' ?>
     
 </body>
 <script> 
@@ -74,55 +119,23 @@
   
        function validate(){
         
-        var name= document.getElementsByName('name')[0].value;
-        var username= document.getElementsByName('Username')[0].value;
-        var phone=document.getElementsByName('phone')[0].value
+ 
+      
 
-        var password_1=document.getElementById('password-1').value;
-        var password_2=document.getElementById('password-2').value;
+        var password_1=document.getElementsByName('password-1')[0].value;
+        var password_2=document.getElementsByName('password-2')[0].value;
         
-       var email = document.getElementsByName('email')[0].value
-        var error=0;
-             
-              if(name.trim()==''){
-              document.getElementById('errorName').innerHTML="nhap ho ten"
-              error=1;
-            }
 
-             if(username.trim()==''){ 
-              document.getElementById('errorUserName').innerHTML="nhap ten dang nhap"
-               error=1;
-             }
-
-            if(phone.trim()==''){
-              document.getElementById('errorPhone').innerHTML="nhap sdt "
-              error=1;
-            }
 
              if (password_1 != password_2){
-              document.getElementById('errorVPw').innerHTML=" khong trung mat khau"
-             error=1;;
+              document.getElementById('errorPW').innerHTML=" khong trung mat khau"
+               return false;
              }
 
-            if(password_1==''||password_2==''){
-              document.getElementsByClassName('errorPw')[0].innerHTML="nhap mat khau"
-              document.getElementsByClassName('errorPw')[1].innerHTML="nhap lai mat khau"
-              error=1;;
-            } 
-
-             if(email.trim()==''){
-              document.getElementById('errorEmail').innerHTML="nhap email"
-               error=1;
-             } 
-
-            if(error==1){
-                return false;
-            }
-
            
-        
-
        }
+    
+ 
     
 </script>
 </html>

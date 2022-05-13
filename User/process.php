@@ -85,22 +85,18 @@ session_start() ;
       case "ShowDetail":
            $id=$_POST['id'];
            $result=mysqli_query($connect,"select * from order_detail JOIN product on product.id = order_detail.product_id where order_id=$id");  
-           $ouput ='<table border=1>';
-            $ouput.=' 
-               <tr>
-                  <td> San Pham </td>
-                  <td> So Luong </td>
-              </tr>
-                ';
+           $ouput='';
+            
              foreach($result as $each){
                   $ouput.= ' 
                   <tr>
                     <td>'.$each['Name'].'</td>
                     <td>'.$each['quantity'].'</td>
+                    <td>'.$each['quantity']*$each['Price'].'</td>
                    </tr>
                  ';
-             }   
-             $ouput.='</table> <button onclick="remove()">remove</button>';
+              }   
+            
             echo $ouput;           
             break;
 
@@ -144,21 +140,23 @@ session_start() ;
                    $ouput='';
                  foreach($result as $value) {
                   $ouput.= '
-                  <div class="col-3 mb-5 mt-5 d-flex justify-content-center "   >  
+                  <div class="col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mt-5"   >  
                     <div class="card align-items-center" style="width:200px ;width:250px; box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);"> 
                        <div class="card-img" > <img height="200px" style="width: 100%;" src=" ../admin/product/photos/'.$value['Image'].'" alt="" >  </div>
                        <div class="card-body text-center">
                            <div class="card-title"> <h5>'.$value['Name'].'</h5></div>
                            <div class="card-text">'.$value['Price'].'</div>               
                            <div class="card-text">                             
-                             <input type="number" value="1" name="quantity" min="1" max="50"    id="quantity_'.$value['id'].'"  onchange="checkvalue('.$value['id'].')" >                                              
+                             <input type="number" value="1" name="quantity" min="1" max="50" class="text-center"   id="quantity_'.$value['id'].'" onkeypress="check(event)"  onchange="checkvalue('.$value['id'].')" >                                              
                            </div>
 
                            <div> <a href="ProductDetail.php?id='.$value['id'].'"> Chi Tiet San Pham </a> </div>                           
                        </div>
-                       <div> <input type="button" class="btn btn-primary text-center" onclick="addtoCart('.$value['id'].')" value="addtoCart"> </div>
-                       <div> <input type="button" onclick="order('.$value['id'].')" value="order"> </div>
-                    
+                       <div class="mb-5"> 
+                         <input type="button" class="btn btn-primary text-center" onclick="addtoCart('.$value['id'].')" value="addtoCart"> 
+                         <input type="button" class="btn btn-primary text-center" onclick="order('.$value['id'].')" value="order">
+                       </div>
+                
                        <input type="hidden" name="id" value="'.$value['id'].' " id="id_'.$value['id'].'">
                        <input type="hidden" name="name" value="'.$value['Name'].'" id="name_'.$value['id'].'">
                        <input type="hidden" name="price" value="'.$value['Price'].'" id="price_'.$value['id'].'">
@@ -171,9 +169,9 @@ session_start() ;
                   ' ;
                  } ; 
                   
-                 $ouput.='<div class="row"> </div>';
-                 $ouput.='<nav aria-label="Page navigation example ">
-                            <ul class="pagination justify-content-center">';
+             
+                 $ouput.='<nav aria-label="Page navigation example mb-2">
+                            <ul class="pagination justify-content-center mt-2">';
                  for($i=1;$i<=$PerPage;$i++){
                   $ouput.= '  <li class="page-item"> <button onclick="PageNumber('.$i.')" class="page-link">'.$i.'</button></li>
                          ';

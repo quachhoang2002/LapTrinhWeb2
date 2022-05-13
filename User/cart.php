@@ -23,50 +23,114 @@
      }
        require('../connect.php');
       $user_id=$_SESSION['id'];
-      $result=mysqli_query($connect,"select * from cart where user_id=$user_id");
+      $result=mysqli_query($connect,"select cart.*,category.Type from cart join product on product.id=cart.product_id join category on product.product_type=category.id where cart.user_id=$user_id");
       $row=mysqli_num_rows($result);
-      $result_total= mysqli_query($connect,"select sum(price*quantity) as tong from cart where user_id=$user_id");
-       $total=mysqli_fetch_array($result_total)['tong'];
+
+      $result_total= mysqli_query($connect,"select sum(price*quantity) as total_price from cart where user_id=$user_id");
+      $total=mysqli_fetch_array($result_total)['total_price'];
+
+      $count_item=mysqli_query($connect,"select sum(quantity)  as total_item from cart where user_id =$user_id");
+      $total_item=mysqli_fetch_array($count_item)['total_item'];
      
   ?>  
   <?php require 'header.php' ?>
-  <a href="index.php"> Mua Hang</a>
-  <?php if ($row>=1){ ?>
+  <?php if ($row>=1) : ?>
         
-     <table border="1" >
-          <tr>
-            <td></td>
-            <td>Ten</td>
-            <td>Gia</td>
-            <td>So Luong</td>
-            <td>Tam Tinh</td>
-          </tr>
+    
 
-         <?php foreach($result as $each){?>
-         
-           <tr >
-                  <td> <img src=" ../admin/product/photos/<?php echo $each['image'] ?> " alt="" height="100px">  </td>
-                  <td> <?php echo $each['product_name'] ?> </td>
-                  <td id="price<?php echo $each['id'] ?>">  <?php echo $each['price'] ?> </td>
-                  <td > <input type="number" id="quantity_<?php echo $each['id']?>" min="0"  style="text-align:center"  onkeypress="check(event)" onchange="edit_data(<?php echo $each['id']?>)"  value="<?php echo $each['quantity']?>" > </td>
-                  <td id="temp<?php echo $each['id'] ?>" class="temp" >  <?php echo $each['price']*$each['quantity'] ?>  </td>
-                 <td> <input type="button" value="xoa" onclick="delete_data(<?php  echo $each['id'] ?>)"> </td>
-          </tr>
-                  
-           
-       <?php  } ?> 
-           <tr>
-             <td colspan="5" style="text-align: center;" id="total" > Tong Tien :<?php echo $total ?></td>
-           </tr>
-   </table> 
-
-  
-   <a href="order.php" >Orders</a>
    
- 
- <?php }   
-     else echo "chua co san pham ";
-  ?>
+   <section class="vh-100" style="background-color: aliceblue;">
+      <div class="d-flex justify-content-center pt-5">
+      <a href="../User/" class="align-self-center text-decoration-none fw-bolder" style="font-size:55px;color:#403019"> KKH Shop</a>
+      </div>
+
+    <div class="container h-75">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <p><span class="h2">Shopping Cart <i class="ti-shopping-cart"></i> </span><span class="h4" id="item">(<?php echo $total_item ?> item in your cart)</span></p>
+  
+          <div class="card mb-4">
+            <div class="card-body p-4">
+            <?php foreach($result as $each): ?>
+              <div class="row align-items-center CartItem">
+                <div class="col-md-2 ">
+                  <img src="../admin/product/photos/<?php echo $each['image']; ?>" style="height:100px;width:150px"
+                    class="img-fluid" alt="Generic placeholder image">
+                </div>
+                <div class="col-md-2  d-flex justify-content-center text-center ">
+                  <div>
+                    <p class="small text-muted pb-2">Name</p>
+                    <p class="lead fw-normal mb-0"><?php echo $each['product_name'] ?> </p>
+                  </div>
+                </div>
+                <div class="col-md-2  d-flex justify-content-center text-center">
+                  <div>
+                    <p class="small text-muted pb-2">Type</p>
+                    <p class="lead fw-normal mb-0"><?php echo $each['Type'] ?></p>
+                  </div>
+                </div>
+                
+                
+                <div class="col-md-2  d-flex justify-content-center text-center">
+                  <div>
+                    <p class="small text-muted pb-2">Quantity</p>
+                    <p class="lead fw-normal mb-0"><input type="number" id="quantity_<?php echo $each['id']?>" min="0"  style="text-align:center"  onkeypress="check(event)" 
+                                                                          onchange="update_data(<?php echo $each['id']?>)"  value="<?php echo $each['quantity']?>" > 
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-2  d-flex justify-content-center text-center">
+                  <div>
+                    <p class="small text-muted pb-2 ">Price</p>
+                    <p class="lead fw-normal mb-0 "  id="price<?php echo $each['id'] ?>"> <?php echo $each['price'] ?>$ </p>
+                  </div>
+                </div>
+                <div class="col-md-2  d-flex justify-content-center text-center">
+                  <div>
+                    <p class="small text-muted pb-2">Xoa</p>
+                    <p class="lead fw-normal mb-0"><input type="button" class="btn btn-primary" value="xoa" onclick="delete_data(<?php  echo $each['id'] ?>)"></p>
+                  </div>
+                </div>
+              </div>
+              <?php endforeach ?>
+              
+  
+            </div>
+          </div>
+  
+          <div class="card mb-5">
+            <div class="card-body p-4">
+  
+              <div class="float-end">
+                <p class="mb-0 me-5 d-flex align-items-center">
+                  <span class="small text-muted me-2">Order total:</span> 
+                  <span
+                    class="lead fw-normal" id="total"><?php echo $total ?>$ 
+                  </span>
+                </p>
+              </div>
+  
+            </div>
+          </div>
+  
+          <div class="d-flex justify-content-end">
+            <a href="page.php" type="button" class="btn btn-light btn-lg me-2">Continue shopping</a>
+            <a href="order.php"  type="button" class="btn btn-primary btn-lg" >Payment</a>
+           </div>
+  
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <?php else : ?>
+    <section class="d-flex  flex-column justify-content-center align-items-center" style="background-color: aliceblue;min-height:500px"> 
+     <h1> hay mua san pham </h1>   
+     <a href="page.php" style="font-size:30px">Shopping</a>
+    </section>
+  <?php endif ?>
+   
+  
 
    <?php require 'footer.php' ?>
 
@@ -74,13 +138,14 @@
   <script type="text/javascript">
 
     function check(event) {
+      var quantity=$("#quantity_"+id).val()
       var x = event.charCode || event.keyCode;
       if (x <48 || x > 57) {  
          event.preventDefault()
       }
     }
 
-      function edit_data(id){
+    function update_data(id){
      var quantity=$("#quantity_"+id).val()
       
       if(quantity<=0){ 
@@ -88,34 +153,19 @@
            location.reload()
             return false
           } else {
-            $('#temp'+id).parent().remove();}
+            window.location.reload();
+          }
           
        } 
-       if(quantity!= parseInt(quantity)){
-        window.location.reload() 
-        return false
-       }   
+       
 
        $.ajax({
             url:"process.php?action=update",
             method:"POST",
             data:{id:id,quantity:quantity},
             success:function(data){
-                 var price=parseInt($('#price'+id).html())
-                 var total=0
-            $('#temp'+id).html(quantity*price)  
-    
-            
-            $('.temp').each(function(){
-                    total+=parseFloat($(this).html()) ;
-                    console.log(total);               
-                 }) 
-
-                if(total<=0){
-                    location.reload();
-                 }
-             
-              $('#total').html('Tong Tien :'+total);
+               $("#total").load(location.href + " #total")
+               $("#item").load(location.href + " #item")
            }
          }) 
    

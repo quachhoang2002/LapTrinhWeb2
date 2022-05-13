@@ -31,10 +31,14 @@ if(isset($_COOKIE['remember'])){
 
 
  ?>
-<body>
-   
+<body >
 
- <section class="vh-100 gradient-custom">
+  <header style="background-color: #edfafd;height:75px;" class="container-fluid d-flex justify-content-around  ">
+     <a href="../User/" class="align-self-center text-decoration-none" style="font-size:35px;color:#403019"> KKH Shop</a>
+     <a href="" class="align-self-center text-decoration-none" style="color:#403019"> Ban Can Giup Do ?</a>    
+  </header>
+
+ <section class="vh-50 gradient-custom">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -42,7 +46,7 @@ if(isset($_COOKIE['remember'])){
             <div class="card-body p-5 text-center">
   
               <div class="mb-md-5 mt-md-4 pb-5">
-  
+                 
                 <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                 <p class="text-white-50 mb-5">Please enter your login and password!</p>
  
@@ -51,12 +55,12 @@ if(isset($_COOKIE['remember'])){
                 
                  <div class="form-outline form-white mb-4">
                   <label class="form-label" for="Username">Username</label>
-                  <input type="text" name="username" id="Username" class="form-control form-control-lg" placeholder="Username" />  
+                  <input type="text" name="username" id="Username" class="form-control form-control-lg" placeholder="Username" required />  
                 </div>
   
                 <div class="form-outline form-white mb-4">
                   <label class="form-label" for="typePasswordX">Password</label>
-                  <input type="password" name="password" id="typePasswordX" class="form-control form-control-lg"   placeholder="password" />
+                  <input type="password" name="password" id="typePasswordX" class="form-control form-control-lg"   placeholder="password" required />
                 </div>
                 Ghi nho dang nhap <input type="checkbox" name="remember">
                 <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
@@ -65,11 +69,6 @@ if(isset($_COOKIE['remember'])){
              </form>
                 
   
-                <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                  <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                  <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                  <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-                </div>
   
               </div>
                          <?php if(isset($_SESSION['error'])) : ?>
@@ -87,6 +86,7 @@ if(isset($_COOKIE['remember'])){
       </div>
     </div>
   </section>
+  <?php require '../User/footer.php' ?>
 
 
 </body>

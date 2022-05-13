@@ -24,7 +24,7 @@
                 <div class="row gx-5 align-items-center justify-content-center">
                     <div class="col-lg-8 col-xl-7 col-xxl-6">
                         <div class="my-5 text-center text-xl-start">
-                            <h1 class="display-5 fw-bolder text-white mb-2">Python Shop</h1>
+                            <h1 class="display-5 fw-bolder text-white mb-2">KKH Shop</h1>
                             <p class="lead fw-normal text-white-50 mb-4">Số lượng người dùng smartphone ngày càng gia tăng, giá thành hợp túi tiền khiến cho smartphone xuất hiện và thay thế máy tính, laptop hãy đến với chúng tôi để có những chiếc smartphone chất lượng</p>
                             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                                 <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
@@ -32,7 +32,29 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://oasis.opstatics.com/content/dam/oasis/page/2021/operation/1217/homepage/mo/02-OnePlus-9.jpg" alt="..." /></div>
+                    <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center justify-content-center">     
+                               <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                               <div class="carousel-inner">
+                                 <div class="carousel-item active" data-bs-interval="2000">
+                                   <img src="https://bepcuana.com/wp-content/uploads/2021/12/brodard-bakery.jpg" class="d-block w-100" alt="..." style="width:600px;height:400px ;">
+                                 </div>
+                                 <div class="carousel-item" data-bs-interval="2000">
+                                   <img src="https://file.hstatic.net/1000313040/file/kt_001-_tiramisu_vu_ng_-_dsc05936_33e8eed7e04a4c13a7b9860601a5c9f0_grande.jpg" class="d-block w-100 " alt="..." style="width:600px;height:400px ;">
+                                 </div>
+                                 <div class="carousel-item" data-bs-interval="2000">
+                                   <img src="https://mcdn.coolmate.me/image/June2021/quan-banh-ngot-22.jpg" class="d-block w-100 " alt="..." style="width:600px;height:400px ;">
+                                 </div>
+                               </div>
+                               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                 <span class="visually-hidden">Previous</span>
+                               </button>
+                               <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                 <span class="visually-hidden">Next</span>
+                               </button>
+                             </div>    
+                    </div>
                 </div>
             </div>
         </header>

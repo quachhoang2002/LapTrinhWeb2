@@ -26,7 +26,7 @@
                        exit;
                       } 
            
-                   else if(mysqli_num_rows($resultPhone)==1){
+                    if(mysqli_num_rows($resultPhone)==1){
                      header('location:register-form.php');
                      $_SESSION['error']="SDT da ton tai ";
                      $_SESSION['name']=$name;
@@ -37,7 +37,7 @@
                      exit;
                     } 
            
-                   else if(mysqli_num_rows($resultEmail)==1){
+                   if(mysqli_num_rows($resultEmail)==1){
                      header('location:register-form.php');
                      $_SESSION['error']="email da ton tai ";
                      $_SESSION['name']=$name;
@@ -47,18 +47,17 @@
                      exit;
                     } 
            
-                   else if ( (isset($name)) &&(isset($username)) &&(isset($phone)) &&(isset($password_1)) &&(isset($password_2)) &&(isset($email))   ){
-                     if($password_1!=$password_2) {
-                         header('location:register-form.php');
-                         exit;
-                     } 
-                     mysqli_query($connect,"insert into user(fullname,username,phone,password,email) values ('$name','$username','$phone',PASSWORD('$password_1'),'$email')"); 
-                     header('location:register-proccess.php');
-                     mysqli_close($connect);
-                     $_SESSION['success']="dang ky thanh cong ";
-                 
+                   if ( (empty($name)) ||(empty($username)) ||(empty($phone)) ||(empty($password_1)) ||(empty($password_2)) ||(empty($email))   ){
+                      $_SESSION['error']="nhap day du thong tinh";
+                       header('location:register-form.php');
+                       exit;     
                   }  
-                  else header('location:register-form.php');
+                  else {
+                    mysqli_query($connect,"insert into user(fullname,username,phone,password,email) values ('$name','$username','$phone',PASSWORD('$password_1'),'$email')"); 
+                    header('location:login-form.php');
+                    mysqli_close($connect);
+                   $_SESSION['success']="dang ky thanh cong ";
+                  };
                   break;
           
 
