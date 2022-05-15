@@ -32,7 +32,7 @@ session_start();
    <h1 class="fw-bolder text-center pt-5" style="font-size:55px;color:#403019">KKH SHOP</h1>
     <div class="container d-flex align-items-center justify-content-center " style="min-height:500px">
     
-       <table class="table table-bordered ">
+       <table class="table table-bordered " id="OrderList">
 
           <thead>
                <tr>
@@ -130,7 +130,7 @@ session_start();
                 method:'post',
                 data:{ id:id },
                 success:function(data){
-                  $("#total").load(location.href + " #total")
+                  $("#OrderList").load(location.href + " #OrderList")
                 }
             })
          }
