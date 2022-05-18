@@ -49,14 +49,12 @@ $action = $_GET['action'];
                  $file_name=time().basename((($image['name'])));
                  $target_file=$target_dir . $file_name;
                  move_uploaded_file($image["tmp_name"],$target_file);
-                 mysqli_query($connect,"update product set Name='$name',Price=$price,product_type=$type,Image='$file_name',description='$description',manufacture_id=$manufacture_id where id=$id");
-                
+                 mysqli_query($connect,"update product set Name='$name',Price=$price,product_type=$type,Image='$file_name',description='$description',manufacture_id=$manufacture_id where id=$id");         
            } 
            else {
-              mysqli_query($connect,"update product set Name='$name',Price=$price,product_type=$type,description='$description',manufacture_id=$manufacture_id where id=$id");
-             
+              mysqli_query($connect,"update product set Name='$name',Price=$price,product_type=$type,description='$description',manufacture_id=$manufacture_id where id=$id");   
            }
-           header('../index.php');
+           header('location:../index.php');
            break;
   
       
