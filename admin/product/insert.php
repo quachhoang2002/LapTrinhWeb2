@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body> 
+
     <?php 
-      require('../../connect.php');
-      $sql="select* from manufacture 
-                           ";
+      require '../../connect.php';
+      $sql="select* from manufacture  ";
       $manufactor=mysqli_query($connect,$sql);
-      $product_type=mysqli_query($connect,"select * from category")
+      $product_type=mysqli_query($connect,"select * from category");
       
-    ?>
-    <form action="process.php?action=createProduct" method="POST" enctype="multipart/form-data" >
- 
-    
+    $output='';
+   $ouput= '
+  <form action="product/process.php?action=createProduct" method="POST" enctype="multipart/form-data" >
     Name <input type="text" name="name"> 
     <br>
     Price <input type="number" name="price">
@@ -27,27 +17,23 @@
     Description <input type="text" name="description"> 
     <br>
     Manufacture 
-    <select name="manufacture_id" id="">
-         <?php foreach($manufactor as $manufacture){?>
-      <option value="<?php echo $manufacture['Ma']?>"> <?php echo $manufacture['name'] ?> </option>
-          <?php
-         } ?>      
-    </select>
-    
-      <br>
-    <select name="type" id="">
-         <?php foreach($product_type as $each){?>
-      <option value="<?php echo $each['id']?>"> <?php echo $each['Type'] ?> </option>
-          <?php
-         } ?>   
-    </select>
+    <select name="manufacture_id" id="">';
 
-    <br>
+         foreach($manufactor as $manufacture){
+     $ouput.= '<option value="'.$manufacture['Ma'].'">'.$manufacture['name'].'</option>';
+          }              
+     $ouput.=
+    '</select>
+       <br>
+     <select name="type" id="">';
+       foreach($product_type as $each){
+       $ouput.= '<option value="'.$each['id'].'">'.$each['Type'].'</option>';
+         }  
+
+       $ouput.=
+    '</select>
+            <br>
     <button>submit </button>
-       
-
-    </form>
-    <a href="createType.php"> Them the loai</a>
-    
-</body>
-</html>
+  </form>';
+  echo $ouput;
+?>

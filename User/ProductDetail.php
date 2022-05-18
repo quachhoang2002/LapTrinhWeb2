@@ -8,8 +8,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="../bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="font/themify-icons/themify-icons.css">
-    <script src="../bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../font/themify-icons/themify-icons.css">
+    <script src="../bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script   src="../jquery-3.6.0.min.js"></script>
 </head> 
   <?php  
@@ -28,7 +29,7 @@
   <div class="container-fluid pt-5 pb-5" style="background-color:aliceblue">
       <div class="row d-flex justify-content-center">
           <div class="col-4">
-              <img src="../admin/product/photos/<?php echo $content['Image'] ?>" alt="" srcset="" style="width:500px;height:600px ">
+              <img src="../admin/photos/<?php echo $content['Image'] ?>" alt="" srcset="" style="width:500px;height:600px ">
           </div>
           <div class="col-4 mt-5 text-center">
           <div id="name"> <?php echo $content['Name'] ?> </div>

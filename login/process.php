@@ -71,7 +71,7 @@
                   }
                   else $remember= false;
                    require '../connect.php';
-                  $result=mysqli_query($connect,"select *from user where username='$username' and password=PASSWORD('$password') ");
+                  $result=mysqli_query($connect,"select *from user where username='$username' and password=PASSWORD('$password') and status=0 ");
                   $getItem=mysqli_fetch_array($result);
                   if(mysqli_num_rows($result)==1){
 

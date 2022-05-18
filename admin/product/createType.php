@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body> 
-     <form action="process.php?action=createType" method="POST">
+     <form action="../process.php?action=createType" method="POST">
             The Loai
            <input type="text" name="type" > 
            <button>Add</button>   

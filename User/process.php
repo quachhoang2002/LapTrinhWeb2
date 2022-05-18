@@ -141,20 +141,27 @@ session_start() ;
                  foreach($result as $value) {
                   $ouput.= '
                   <div class="col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mt-5"   >  
-                    <div class="card align-items-center" style="width:200px ;width:250px; box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);"> 
-                       <div class="card-img" > <img height="200px" style="width: 100%;" src=" ../admin/product/photos/'.$value['Image'].'" alt="" >  </div>
+                     <div class="card align-items-center card text-center product-card pt-3" > 
+                       <div class="card-img" > <img style="width: 100%;height:250px"  src=" ../admin/photos/'.$value['Image'].'" alt="" >  </div>
                        <div class="card-body text-center">
                            <div class="card-title"> <h5>'.$value['Name'].'</h5></div>
                            <div class="card-text">'.$value['Price'].'</div>               
-                           <div class="card-text">                             
-                             <input type="number" value="1" name="quantity" min="1" max="50" class="text-center"   id="quantity_'.$value['id'].'" onkeypress="check(event)"  onchange="checkvalue('.$value['id'].')" >                                              
-                           </div>
-
-                           <div> <a href="ProductDetail.php?id='.$value['id'].'"> Chi Tiet San Pham </a> </div>                           
-                       </div>
-                       <div class="mb-5"> 
+                                               
+                            <div class="small-ratings card-text">
+                              <i class="fa fa-star checked"></i>
+                              <i class="fa fa-star checked"></i>
+                              <i class="fa fa-star checked"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                            </div>                          
+                      </div>
+                       <div class="product-hover"> 
+                         <input type="number" value="1" name="quantity" min="1" max="50" class="text-center mt-2"   id="quantity_'.$value['id'].'" onkeypress="check(event)"  onchange="checkvalue('.$value['id'].')" > 
+                         <br>    
+                         <a href="ProductDetail.php?id='.$value['id'].'"> Chi Tiet San Pham </a> 
+                         <br>
                          <input type="button" class="btn btn-primary text-center" onclick="addtoCart('.$value['id'].')" value="addtoCart"> 
-                         <input type="button" class="btn btn-primary text-center" onclick="order('.$value['id'].')" value="order">
+                         <input type="button" class="btn btn-primary text-center" onclick="order('.$value['id'].')" value="order">   
                        </div>
                 
                        <input type="hidden" name="id" value="'.$value['id'].' " id="id_'.$value['id'].'">

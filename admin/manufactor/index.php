@@ -1,90 +1,73 @@
-<?php    session_start();
-        
+       <?php    
            if(!isset($_SESSION['level'])){
-            header('location:../../admin-login/adminLogin-form.php');
-                     
-           }     
- 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Manage manufactor
-<br>
+            header('location:../admin-login/adminLogin-form.php');                 
+           }  
+        ?>
 
+      <?php
+          $sql="select* from manufacture";
+          $result=mysqli_query($connect,$sql);
+       ?>
 
-    <?php 
-  
-    
-   if(isset($_SESSION['success']) ) {
-   ?> 
-    <span>    
-       <?php 
-      
-       echo $_SESSION['success'] ;
-       unset($_SESSION['success']);
-          ?>
-     </span> 
-   <?php } 
-   
-    require('../../connect.php');
-    $sql="select* from manufacture";
-    $result=mysqli_query($connect,$sql);
-  
+       <?php  if(isset($_SESSION['adminID'])):  ?>
+         <span > 
+             <?php echo $_SESSION['adminName']; ?>
+             <a href="../login/logout.php"> Dang Xuat</a>
+          </span>   
+       <?php endif ?> 
 
-    ?>
-
- <span  > <?php   
-       if(isset($_SESSION['adminID'])){
-        echo $_SESSION['adminName'];
-       ?> <a href="../../login/logout.php"> Dang Xuat</a>
-   <?php } ?> 
-  </span>
-
-     
-
-    <br>
-    <a href="manage/insert.php">ADD Manufacture</a>
-    
-    <?php include('../menu.php')  ?> 
-  
-    <table border="1" width="100%" >  
-  <tr>
-      <td>Ma</td>
-      <td>Ten</td>
-      <td>SDT</td>
-      <td>Hinh Anh</td>
-      <td>sua </td>
-      <td>xoa</td>
-  </tr>
- <?php foreach ($result as $value) {?>
- <tr>
-     <td><?php echo $value['Ma'] ?></td>
-     <td><?php echo $value['name'] ?></td>
-     <td><?php echo $value['phone'] ?></td>
-     <td >  <img src="<?php echo $value['image']?>" alt="" style="height: 50px;"></td>
-     <td> <a href="manage/update-form.php?ma=<?php echo $value['Ma'] ?>"> Sua</a></td>
-     <td> <a href="manage/process.php?action=delete&ma=<?php echo $value['Ma'] ?>">  xoa</a> </td>
- </tr> <?php }
-     ?>
+ <div class="container mt-5 mb-5">
+    <table  class="table table-bordered border-dark text-center align-middle" >  
+      <thead class="gradient-custom-4">
+         <tr>
+             <td>Ma</td>
+             <td>Ten</td>
+             <td>SDT</td>
+             <td>Country</td>
+             <td>sua </td>
+             <td>xoa</td>
+         </tr>
+      </thead>
+      <tbody>
+         <?php foreach ($result as $value) :?>
+          <tr>
+            <td><?php echo $value['Ma'] ?></td>
+            <td><?php echo $value['name'] ?></td>
+            <td><?php echo $value['phone'] ?></td>
+            <td> <?php echo $value['Country']  ?></td>
+            <td> <button onclick="Update(<?php echo $value['Ma']?>)" > Sua</button></td>
+            <td><input type="button" value="xoa"onclick="Delete(<?php echo $value['Ma']?>)"></td>   
+          </tr> 
+         <?php endforeach  ?>
+      </tbody>
     </table>
+  </div>
+    <button onclick="Add(<?php echo $value['Ma']?>)">Them NSX</button>
 
+    <div id="load-form">
+
+   </div>
  
-</body> 
-<script> 
+
+<script type="text/javascript"> 
       
-        
-  
-        
-     
-    
-        
+      function Update(id){
+             $('#load-form').load('manufactor/update-form.php',{id:id})
+        }
+
+        function Delete(id){
+                  $.ajax({
+                    url:'manufactor/process.php?action=delete',
+                    method:'POST',
+                    data:{id:id },
+                    success:function(data){
+                      alert(data)
+                      window.location.reload()
+                    },
+                  })
+                }
+      function Add(){
+        $('#load-form').load('manufactor/insert.php')
+      }
                   
 </script>
-</html>

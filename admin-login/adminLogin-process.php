@@ -17,7 +17,7 @@ if(mysqli_num_rows($result)==1){
     $_SESSION['adminID']=$getItem['id'];
     $_SESSION['level']=$getItem['level'];
     $_SESSION['success']='Dang Nhap thanh cong';
-  header('location:../admin/manufactor'); 
+  header('location:../admin'); 
      
 } 
 

@@ -8,8 +8,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="../bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="font/themify-icons/themify-icons.css">
-    <script src="../bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../font/themify-icons/themify-icons.css">
+    <script src="../bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
     <script   src="../jquery-3.6.0.min.js"></script>
   
 </head>
@@ -39,7 +39,7 @@
     
 
    
-   <section class="vh-100" style="background-color: aliceblue;">
+   <section class="vh-100 gradient-custom-2" >
       <div class="d-flex justify-content-center pt-5">
       <a href="../User/" class="align-self-center text-decoration-none fw-bolder" style="font-size:55px;color:#403019"> KKH Shop</a>
       </div>
@@ -54,7 +54,7 @@
             <?php foreach($result as $each): ?>
               <div class="row align-items-center CartItem">
                 <div class="col-md-2 ">
-                  <img src="../admin/product/photos/<?php echo $each['image']; ?>" style="height:100px;width:150px"
+                  <img src="../admin/photos/<?php echo $each['image']; ?>" style="height:100px;width:150px"
                     class="img-fluid" alt="Generic placeholder image">
                 </div>
                 <div class="col-md-2  d-flex justify-content-center text-center ">
@@ -135,7 +135,7 @@
    <?php require 'footer.php' ?>
 
 
-  <script type="text/javascript">
+ <script type="text/javascript">
 
     function check(event) {
       var quantity=$("#quantity_"+id).val()
@@ -146,46 +146,41 @@
     }
 
     function update_data(id){
-     var quantity=$("#quantity_"+id).val()
-      
-      if(quantity<=0){ 
-          if(confirm('ban muon xoa chu')==false){
-           location.reload()
-            return false
-          } else {
-            window.location.reload();
-          }
-          
-       } 
-       
-
-       $.ajax({
-            url:"process.php?action=update",
-            method:"POST",
-            data:{id:id,quantity:quantity},
-            success:function(data){
-               $("#total").load(location.href + " #total")
-               $("#item").load(location.href + " #item")
-           }
-         }) 
-   
-     }  
-
-        function delete_data(id){
-          
-        if(confirm("ban muon xua nay chu")==true){
-            $.ajax({ 
-            url:"process.php?action=delete",
-            method:"POST",
-            data:{id:id},
-            success:function(data){
-              window.location.reload();
-            }
-          })
-        } 
-         else return false;
+        var quantity=$("#quantity_"+id).val()
          
-     } 
+         if(quantity<=0){ 
+             if(confirm('ban muon xoa chu')==false){
+              location.reload()
+               return false
+             } else {
+               window.location.reload();
+             }     
+          } 
+          
+          $.ajax({
+               url:"process.php?action=update",
+               method:"POST",
+               data:{id:id,quantity:quantity},
+               success:function(data){
+                  $("#total").load(location.href + " #total")
+                  $("#item").load(location.href + " #item")
+              }
+            }) 
+       }  
+
+        function delete_data(id){       
+             if(confirm("ban muon xua nay chu")==true){
+                 $.ajax({ 
+                 url:"process.php?action=delete",
+                 method:"POST",
+                 data:{id:id},
+                 success:function(data){
+                   window.location.reload();
+                 }
+               })
+             } 
+              else return false;
+          } 
      
      
   </script>

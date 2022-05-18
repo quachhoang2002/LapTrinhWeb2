@@ -11,9 +11,10 @@
     <title>Document</title>
     <link rel="stylesheet" href="../bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="font/themify-icons/themify-icons.css">
-    <script src="../bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../font/themify-icons/themify-icons.css">
+    <script src="../bootstrap-5.1.3-dist/js/bootstrap.bundle.js"></script>
     <script   src="../jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body >
     <?php   
@@ -28,7 +29,7 @@
 
 
 
-  <div class="container-fluid pb-5 " style="background-color: var(--bs-gray-400)">
+  <div class="container-fluid pb-5 gradient-custom-2 ">
 
      <div class="row">
            <div class="text-center mt-5 mb-5 fw-bolder" style="font-size: 50px;color:#403019"> KKH SHOP  </div>            

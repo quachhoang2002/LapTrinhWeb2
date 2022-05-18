@@ -8,8 +8,8 @@
        <title>Document</title>
        <link rel="stylesheet" href="../bootstrap-5.1.3-dist/css/bootstrap.min.css">
        <link rel="stylesheet" href="../style.css">
-       <link rel="stylesheet" href="font/themify-icons/themify-icons.css">
-       <script src="../bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+       <link rel="stylesheet" href="../font/themify-icons/themify-icons.css">
+       <script src="../bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
        <script   src="../jquery-3.6.0.min.js"></script>
 </head>
 <?php 
@@ -23,7 +23,7 @@
 ?>
 <body>
        <?php require 'header.php' ?>
-  <div class="card" style="background-color:aliceblue">
+  <div class="card gradient-custom-2" >
 
         <div class="card-body">
       
@@ -65,7 +65,7 @@
                 <tbody>
                 <?php foreach($result as $each): ?>
                   <tr>
-                    <td> <img src="../admin/product/photos/<?php echo $each['image'] ?>" alt="" srcset="" style="width: 150px; height: 150px;"></td>
+                    <td> <img src="../admin/photos/<?php echo $each['image'] ?>" alt="" srcset="" style="width: 150px; height: 150px;"></td>
                     <td> <?php echo $each['product_name'] ?></td>
                     <td><?php echo $each['quantity'] ?></td>
                     <td><?php echo $each['price']*$each['quantity'] ?>$</td>
