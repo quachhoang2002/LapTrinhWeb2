@@ -11,6 +11,7 @@
        <link rel="stylesheet" href="../font/themify-icons/themify-icons.css">
        <script src="../bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
        <script   src="../jquery-3.6.0.min.js"></script>
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <?php 
      require('../connect.php');
@@ -28,13 +29,7 @@
         <div class="card-body">
       
           <div class="container">
-            <div class="row">
-              <div class="col-xl-12">
-                <i class="far fa-building text-danger fa-6x float-start"></i>
-              </div>
-            </div>
-      
-      
+
             <div class="row">
               <div class="col-xl-12">
       
@@ -49,7 +44,7 @@
       
             <div class="row text-center">
               <h3 class="text-uppercase text-center mt-3" style="font-size: 40px;">Invoice</h3>
-              <p>{{user.username}}</p>
+              <p><?php if(isset($_SESSION['id'])){ echo $_SESSION['fullname'];} ?></p>
             </div>
       
             <div class="row mx-3">
@@ -128,4 +123,3 @@
          let text=date.toLocaleDateString()
          document.getElementById("date").innerHTML = text;
      </script>
-</html>

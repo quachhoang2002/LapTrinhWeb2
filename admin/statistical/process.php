@@ -10,16 +10,17 @@
             from product 
             LEFT JOIN order_detail on order_detail.product_id=product.id
             LEFT JOIN orders on orders.id = order_detail.order_id 
-            where orders.time between '$time1' and '$time2' and orders.status=1
+            where orders.time between '$time1' and '$time2' and orders.status=1 
             Group By product.id
             ORDER BY quantitySale DESC
            "); 
  $output='<table class="table table-bordered border-dark text-center align-middle">
-            <thead>
+            <thead class="gradient-custom-4">
              <tr> 
               <td> Id</td>
               <td> Ten</td>
               <td> So Luong</td>
+
             </tr> 
            </thead>';
   $output.='<tbody>';

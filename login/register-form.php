@@ -32,10 +32,8 @@
                 <div class="col-md-8 mb-4">
                   <div class="form-outline">
                      <label class="form-label" >Ho Ten</label>
-                     <input type="text" class="form-control " name="name"  value="<?php if(isset($_SESSION['name']))   
-                      echo $_SESSION['name'];
-                      unset($_SESSION['name']); ?>" pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"  required>
-                         <span class="text-danger" id="errorName"> </span>
+                     <input type="text" class="form-control " name="name"  value="" pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"  required>
+                       
                   </div>
                 </div>
               </div>
@@ -44,10 +42,8 @@
                 <div class="col-md-8 mb-4">
                   <div class="form-outline">
                      <label class="form-label" >Ten Dang Nhap</label>
-                     <input type="text" class="form-control " name="Username" pattern=".{5,}" title="it nhat 5 ky tu" value="<?php if(isset($_SESSION['username']))   
-                      echo $_SESSION['username'];
-                      unset($_SESSION['username']);  ?>" required>
-                         <span class="text-danger" id="errorUserName"> </span>
+                     <input type="text" class="form-control " name="Username" pattern=".{5,}" title="it nhat 5 ky tu" value="" required>
+                        
                   </div>
                 </div>
               </div>
@@ -58,14 +54,12 @@
                     <label class="form-label">Mat Khau</label>
                     <input type="password" class="form-control " name="password-1" title="can it nhat 1 chu so , 1 chu in hoa ,1 chu in thuong va do dai it nhat la 8"
                                                                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
-                         <span  class="text-danger" class="errorPw"> </span>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline datepicker w-100">
                     <label class="form-label">Nhap lai mat khau</label>
                     <input type="password" class="form-control " name="password-2" required >
-                         <span class="text-danger"  class="errorPw"> </span>
                   </div>
                 </div>
               </div>
@@ -74,19 +68,21 @@
                 <div class="col-md-6 mb-4 pb-2">
                   <div class="form-outline">
                     <label class="form-label" >Email</label>
-                    <input type="email" class="form-control " name="email" value="<?php if(isset($_SESSION['email']))   
-                      echo $_SESSION['email'];
-                      unset($_SESSION['email']);  ?>"   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
-                         <span class="text-danger" id="errorEmail"> </span>
+                    <input type="email" class="form-control " name="email" value=""   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4 pb-2">
                   <div class="form-outline">
                      <label class="form-label" >Phone Number</label>
-                     <input type="text" class="form-control " name="phone" value="<?php if(isset($_SESSION['phone']))   
-                      echo $_SESSION['phone'];
-                      unset($_SESSION['phone']);  ?>"  pattern="[0]{1}[0-9]{9}"   title="Phai bat dau bang so 0" required>
-                         <span class="text-danger" id="errorPhone"> </span>
+                     <input type="text" class="form-control " name="phone" value=""  pattern="[0]{1}[0-9]{9}"   title="Phai bat dau bang so 0" required>
+
+                  </div>
+                </div>
+
+                 <div class="col-md-8 mb-4 pb-2">
+                  <div class="form-outline">
+                     <label class="form-label" >Address</label>
+                     <input type="text" class="form-control " name="address" value=""  pattern=".{5,}"    required>
                   </div>
                 </div>
               </div> 
@@ -119,14 +115,9 @@
   
        function validate(){
         
- 
-      
-
         var password_1=document.getElementsByName('password-1')[0].value;
         var password_2=document.getElementsByName('password-2')[0].value;
         
-
-
              if (password_1 != password_2){
               document.getElementById('errorPW').innerHTML=" khong trung mat khau"
                return false;

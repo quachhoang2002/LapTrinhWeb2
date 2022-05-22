@@ -1,39 +1,48 @@
 
     <?php 
-      require '../../connect.php';
-      $sql="select* from manufacture  ";
-      $manufactor=mysqli_query($connect,$sql);
-      $product_type=mysqli_query($connect,"select * from category");
+   require '../../connect.php';
+   $sql="select* from manufacture  ";
+   $manufactor=mysqli_query($connect,$sql);
+   $product_type=mysqli_query($connect,"select * from category");
       
-    $output='';
-   $ouput= '
+   $output='';
+   $output.= '
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Create </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+ <div  class="modal-body">
   <form action="product/process.php?action=createProduct" method="POST" enctype="multipart/form-data" >
-    Name <input type="text" name="name"> 
-    <br>
-    Price <input type="number" name="price">
-    <br>
-    Image <input type="file" name="image">
-    <br>
-    Description <input type="text" name="description"> 
-    <br>
-    Manufacture 
-    <select name="manufacture_id" id="">';
+    Name <input type="text" name="name" class="form-control" required> 
+    Price <input type="number" name="price" class="form-control" required> 
+    Description <input type="text" name="description" class="form-control" required>'; 
+    //type
+    $output.= 'Product Type
+    <select name="type" id="" class="form-select">';
+      foreach($product_type as $each){
+      $output.= '<option value="'.$each['id'].'">'.$each['Type'].'</option>';
+        }  
+    $output.='</select>';
 
+     //manufac
+    $output.= 'Manufacture 
+    <select name="manufacture_id" id="" class="form-select" required>';
          foreach($manufactor as $manufacture){
-     $ouput.= '<option value="'.$manufacture['Ma'].'">'.$manufacture['name'].'</option>';
+     $output.= '<option value="'.$manufacture['Ma'].'">'.$manufacture['name'].'</option>';
           }              
-     $ouput.=
-    '</select>
-       <br>
-     <select name="type" id="">';
-       foreach($product_type as $each){
-       $ouput.= '<option value="'.$each['id'].'">'.$each['Type'].'</option>';
-         }  
+     $output.= '</select>';
+   
 
-       $ouput.=
-    '</select>
-            <br>
-    <button>submit </button>
-  </form>';
-  echo $ouput;
+    $output.=
+    'Image <input type="file" name="image"  required>
+    <br>
+     <div class="modal-footer mt-3">
+             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+             <button type="onsubmit" class="btn btn-primary">Create</button>
+     </div>    
+
+  </form>
+  </div>';
+  
+  echo $output;
 ?>

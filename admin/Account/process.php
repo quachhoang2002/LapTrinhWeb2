@@ -8,11 +8,22 @@ session_start();
           mysqli_query($connect,"update  admin set status=1 where id=$id");
           mysqli_close($connect);
           break;
+      case 'AdminUnblock': 
+        $id= $_POST['id'];
+        mysqli_query($connect,"update  admin set status=0 where id=$id");
+        mysqli_close($connect);
+        break;  
+
       case 'user': 
            $id= $_POST['id'];
            mysqli_query($connect,"update  user set status=1 where id=$id");
            mysqli_close($connect);
            break;
+     case 'UserUnblock':
+        $id= $_POST['id'];
+        mysqli_query($connect,"update  user set status=0 where id=$id");
+        mysqli_close($connect);
+        break;
       
   }
 ?>

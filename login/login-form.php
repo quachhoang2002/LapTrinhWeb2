@@ -13,23 +13,19 @@
     <script   src="../jquery-3.6.0.min.js"></script>
 </head>
 <?php  
- 
-
-if(isset($_COOKIE['remember'])){
-    require '../connect.php';
-    $id=$_COOKIE['remember'];
-    $result=mysqli_query($connect,"select* from user where id=$id");
-    $row=mysqli_fetch_array($result);
-    // $error=mysqli_error($connect);
-    // echo $error;
-    $_SESSION['id'] = $row['id'];
-    $_SESSION['fullname']=$row['fullname'];
-    header('location:../User');
-    
-
-}
-
-
+    if(isset($_COOKIE['remember'])){
+        require '../connect.php';
+        $id=$_COOKIE['remember'];
+        $result=mysqli_query($connect,"select* from user where id=$id");
+        $row=mysqli_fetch_array($result);
+        $_SESSION['id'] = $row['id'];
+        $_SESSION['fullname']=$row['fullname'];
+        $_SESSION['avatar']=$row['image'];
+        header('location:../User');   
+    }
+    if(isset($_SESSION['id'])){
+      header('location:../User');              
+     }
  ?>
 <body >
 
@@ -50,32 +46,32 @@ if(isset($_COOKIE['remember'])){
                 <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                 <p class="text-white-50 mb-5">Please enter your login and password!</p>
  
-             <form action="process.php?action=login" method="POST">
-    
+                  <form action="process.php?action=login" method="POST">        
+                      <div class="form-outline form-white mb-4">
+                       <label class="form-label" for="Username">Username</label>
+                       <input type="text" name="username" id="Username" class="form-control form-control-lg" placeholder="Username" required />  
+                     </div>
+       
+                     <div class="form-outline form-white mb-4">
+                       <label class="form-label" for="typePasswordX">Password</label>
+                       <input type="password" name="password" id="typePasswordX" class="form-control form-control-lg"   placeholder="password" required />
+                     </div>
+                     Ghi nho dang nhap <input type="checkbox" name="remember">
+                    <br>
+                     <?php if(isset($_SESSION['error'])) : ?>
+                       <span class="text-danger"> <?php echo $_SESSION['error'];unset($_SESSION['error']) ?> </span>
+                     <?php  endif ?>
+
+                     <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>   
+                     <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                  </form>
                 
-                 <div class="form-outline form-white mb-4">
-                  <label class="form-label" for="Username">Username</label>
-                  <input type="text" name="username" id="Username" class="form-control form-control-lg" placeholder="Username" required />  
-                </div>
-  
-                <div class="form-outline form-white mb-4">
-                  <label class="form-label" for="typePasswordX">Password</label>
-                  <input type="password" name="password" id="typePasswordX" class="form-control form-control-lg"   placeholder="password" required />
-                </div>
-                Ghi nho dang nhap <input type="checkbox" name="remember">
-                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
-  
-                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-             </form>
-                
-  
-  
               </div>
-                         <?php if(isset($_SESSION['error'])) : ?>
-                            <span class="bg-danger"> <?php echo $_SESSION['error'];unset($_SESSION['error']) ?> </span>
-                         <?php  endif ?>
-               <div>
-                <p class="mb-0">Don't have an account? <a href="register-form.php" class="text-white-50 fw-bold">  Dang Ky</a>
+                
+
+               <div>               
+                <p class="mb-0">Don't have an account? 
+                  <a href="register-form.php" class="text-white-50 fw-bold">  Dang Ky</a>
                 </p>
               </div>
          

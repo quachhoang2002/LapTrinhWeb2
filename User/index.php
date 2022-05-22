@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../font/themify-icons/themify-icons.css">
-    <script src="../bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../bootstrap-5.1.3-dist/js/bootstrap.bundle.js"></script>
     <script   src="../jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-    <?php require 'header.php'   ?>
     
-    <body class="d-flex flex-column h-100">
+
+  <body class="d-flex flex-column h-100">
     <main class="flex-shrink-0">
         <!-- Navigation-->
+        <?php require 'header.php'   ?>
         <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-5">
@@ -206,13 +207,11 @@
         </section>
     </main>
     <!-- Footer-->
-    
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
-</body>
     <?php require 'footer.php'  ?>
-     
+    <!-- Bootstrap core JS-->
+
 </body>
+   
+     
+
 </html>

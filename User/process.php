@@ -188,6 +188,74 @@ session_start() ;
                           </nav>';
                  echo $ouput;               
                  break;
+                
+                 case 'profile':
+                     $id =$_POST['id'];
+                     $name=$_POST['name'];
+                     $phone=$_POST['phone'];
+                     $address=$_POST['address'];
+                     $email=$_POST['email'];
+                     $target_dir='../admin/photos/';
+                     $image=$_FILES['image'];
+        
+                     $resultPhone=mysqli_query($connect,"select * from user where phone='$phone' and id!=$id");
+                     $resultEmail=mysqli_query($connect,"select * from user where email='$email'  and id != $id");
+
+                     //check thong tin                  
+                        if(mysqli_num_rows($resultPhone)==1){ 
+                         $_SESSION['error']="SDT da ton tai "; 
+                         header('location:profile.php');                   
+                         exit;
+                        } 
+                
+                       if(mysqli_num_rows($resultEmail)==1){               
+                         $_SESSION['error']="email da ton tai ";
+                         header('location:profile.php');
+                         exit;
+                        } 
+                
+                       if ( (empty($name)) ||(empty($phone))||(empty($email))||empty($address)   ){
+                          $_SESSION['error']="nhap day du thong tinh";
+                           header('location:profile.php');
+                           exit;     
+                      } 
+                      if($image['size']>0){             
+                           $file_name=time().basename((($image['name'])));
+                           $target_file=$target_dir . $file_name;
+                           move_uploaded_file($image["tmp_name"],$target_file);
+                           mysqli_query($connect,"update user set fullname='$name',phone='$phone',address='$address',image='$file_name' where id=$id "); 
+                           $_SESSION['success']='Thay doi thanh cong';
+                           header('location:profile.php');        
+                     } 
+                     else {
+                           mysqli_query($connect,"update user set fullname='$name',phone='$phone',address='$address' where id=$id ");  
+                           $_SESSION['success']='Thay doi thanh cong'; 
+                           header('location:profile.php');
+                     }
+                     break;
+
+                     case 'ChangePassword':
+                            $old_password=md5($_POST['old-password']);
+                            $new_password=md5($_POST['new-password']);
+                            $id=$_POST['id'];
+                            $result=mysqli_query($connect,"select password from user where id= $id ");
+                            $result=mysqli_fetch_array($result);
+                            if($result['password']!= $old_password){
+                              $_SESSION['error']="khong trung voi mat khau cu";
+                              header('location:profile.php');  
+                              exit;
+                            }
+                            if((empty($new_password))||(empty($old_password)) ) {
+                              $_SESSION['error']='hay nhap day du ';
+                              header('location:profile.php');  
+                              exit;
+                            }
+                            else {
+                              mysqli_query($connect,"update user set password ='$new_password' where id=$id ");   
+                              $_SESSION['success']='Thay doi thanh cong';
+                              header('location:profile.php');
+                            }
+                            break;
 
 
       default: 
