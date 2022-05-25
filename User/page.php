@@ -32,7 +32,7 @@
   <div class="container-fluid pb-5 gradient-custom-2 ">
 
      <div class="row">
-           <div class="text-center mt-5 mb-5 fw-bolder" style="font-size: 50px;color:#403019"> KKH SHOP  </div>            
+           <div class="text-center mt-5 mb-5 fw-bolder" style="font-size: 50px;color:#403019"> KKH BAKERY  </div>            
      </div>
     
     

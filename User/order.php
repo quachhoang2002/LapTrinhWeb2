@@ -37,7 +37,7 @@
             <div class="row">
               <div class="col-xl-12">   
                 <ul class="list-unstyled float-end">
-                  <li style="font-size: 30px; color: red;">Python Shop</li>
+                  <li style="font-size: 30px; color: red;">KKH BAKERY</li>
                   <li> 30 Binh Phu</li>
                   <li>123-456-789</li>
                   <li>mail@mail.com</li>

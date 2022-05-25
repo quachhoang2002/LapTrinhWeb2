@@ -42,7 +42,7 @@
    
    <section class="vh-100 gradient-custom-2" >
       <div class="d-flex justify-content-center pt-5">
-      <a href="../User/" class="align-self-center text-decoration-none fw-bolder" style="font-size:55px;color:#403019"> KKH Shop</a>
+      <a href="../User/" class="align-self-center text-decoration-none fw-bolder" style="font-size:55px;color:#403019"> KKH BAKERY</a>
       </div>
 
     <div class="container h-75">
