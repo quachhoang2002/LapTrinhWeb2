@@ -26,16 +26,10 @@
               <?php  if(isset($_SESSION['adminID'])):  ?> 
                 <div class="dropdown pb-4 position-sticky ">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                      <img src="photos/1653489808Bánh lớp sừng trâu.jpg" alt="hugenerd" width="30" height="30" class="rounded-circle">
                       <span class="d-none d-sm-inline mx-1"> <?php echo $_SESSION['adminName']; ?></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                      <li><a class="dropdown-item" href="#">New project...</a></li>
-                      <li><a class="dropdown-item" href="#">Settings</a></li>
-                      <li><a class="dropdown-item" href="#">Profile</a></li>
-                      <li>
-                          <hr class="dropdown-divider">
-                      </li>
                       <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
                     </ul>
                 </div>
@@ -52,6 +46,12 @@
                     <li class="nav-item">
                         <a href="?side=Product" class="nav-link align-middle px-0">
                             <i class="ti-package"></i> <span class="ms-1 d-none d-sm-inline">Product</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="?side=ProductType" class="nav-link align-middle px-0">
+                            <i class="ti-layers"></i> <span class="ms-1 d-none d-sm-inline">Product Type</span>
                         </a>
                     </li>
                   
@@ -90,6 +90,13 @@
                          <i class="ti-briefcase"></i> <span class="ms-1 d-none d-sm-inline">Manufactor</span> </a>
                     </li>
 
+                  <?php if (isset($_SESSION['level'])&& $_SESSION['level']>=1): ?>
+                    <li class="nav-item">
+                        <a href="?side=voucher" class="nav-link align-middle px-0">
+                            <i class="ti-tag"></i> <span class="ms-1 d-none d-sm-inline">Voucher</span>
+                        </a>
+                    </li>
+                 <?php  endif ?>
 
                  <?php if (isset($_SESSION['level'])&& $_SESSION['level']==2): ?>
                      <li>
@@ -117,7 +124,10 @@
                   case 'Product':
                   require 'product/index.php';
                   break;
-         
+             
+                  case 'ProductType':
+                  require 'ProductType/index.php';
+                  break;
 
                   case 'CustomerOrder';
                   require 'OrdersManage/CustomerOrder.php';
@@ -138,6 +148,10 @@
 
                   case 'AdminAccount':
                   require 'Account/AdminAccountList.php';
+                  break;
+
+                  case 'voucher':
+                  require 'Coupon/index.php';
                   break;
 
                   case 'CreateAdmin':

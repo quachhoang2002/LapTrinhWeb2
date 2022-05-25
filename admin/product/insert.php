@@ -15,7 +15,7 @@
   <form action="product/process.php?action=createProduct" method="POST" enctype="multipart/form-data" >
     Name <input type="text" name="name" class="form-control" required> 
     Price <input type="number" name="price" class="form-control" required> 
-    Description <input type="text" name="description" class="form-control" required>'; 
+    Description <textarea type="text" name="description" class="form-control" required> </textarea>'; 
     //type
     $output.= 'Product Type
     <select name="type" id="" class="form-select">';

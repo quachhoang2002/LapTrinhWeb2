@@ -57,7 +57,7 @@
           <h6 class="text-uppercase fw-bold mb-4">
             Contact
           </h6>
-          <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+          <p><i class="fas fa-home me-3"></i> VietNam,Ho Chi Minh City</p>
           <p>
             <i class="fas fa-envelope me-3"></i>
             info@example.com
@@ -75,7 +75,7 @@
   <!-- Copyright -->
   <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
     © 2021 Copyright:
-    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">KKHBakery.com</a>
   </div>
   <!-- Copyright -->
 </footer>

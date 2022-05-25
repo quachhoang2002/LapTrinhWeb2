@@ -43,36 +43,46 @@
   
               <div class="mb-md-5 mt-md-4 pb-5">
                  
-                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                <h2 class="fw-bold mb-2 text-uppercase">Forgot password</h2>
+                <p class="text-white-50 mb-5">Please enter your email </p>
  
-                  <form action="process.php?action=login" method="POST">        
-                      <div class="form-outline form-white mb-4">
+                  <form action="process.php?action=forgot-password" method="POST" onsubmit="return validate()">     
+				     <div class="form-outline form-white mb-4">
                        <label class="form-label" for="Username">Username</label>
                        <input type="text" name="username" id="Username" class="form-control form-control-lg" placeholder="Username" required />  
                      </div>
-       
-                     <div class="form-outline form-white mb-4">
-                       <label class="form-label" for="typePasswordX">Password</label>
-                       <input type="password" name="password" id="typePasswordX" class="form-control form-control-lg"   placeholder="password" required />
+
+				     <div class="form-outline form-white mb-4">
+                       <label class="form-label" for="email">Email</label>
+                       <input type="text" name="email" id="email" class="form-control form-control-lg" placeholder="enter email" required />  
                      </div>
-                     Ghi nho dang nhap <input type="checkbox" name="remember">
-                    <br>
-                     <?php if(isset($_SESSION['error'])) : ?>
+
+                     <div  class="form-outline form-white mb-4">
+					   <label class="form-label" for="Username">password</label>
+                       <input type="password" name="password-1" id="password-1" class="form-control form-control-lg" placeholder="enter password"   title="can it nhat 1 chu so , 1 chu in hoa ,1 chu in thuong va do dai it nhat la 8"
+                                                                                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required />  
+                     </div>
+
+                     <div class="form-outline form-white mb-4">
+					   <label class="form-label" for="Username">confirm password</label>
+                       <input type="password" name="password-2" id="password-2" class="form-control form-control-lg" placeholder="enter confirm password" required />  
+                     </div>
+			
+					 <span class="text-danger text-center" id="errorPW"></span>
+					 <?php if(isset($_SESSION['error'])) : ?>
                        <span class="text-danger"> <?php echo $_SESSION['error'];unset($_SESSION['error']) ?> </span>
                      <?php  endif ?>
-
-                     <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="forgot-pw.php">Forgot password?</a></p>   
-                     <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                      <br>
+					 <button type="submit" class="btn btn-primary">  Xac nhan</button>
                   </form>
                 
               </div>
                 
 
                <div>               
-                <p class="mb-0">Don't have an account? 
-                  <a href="register-form.php" class="text-white-50 fw-bold">  Dang Ky</a>
-                </p>
+             
+                  <a href="login-form.php" class="text-white-50 fw-bold">  Dang Nhap</a>
+              
               </div>
          
   
@@ -84,6 +94,17 @@
   </section>
   <?php require '../User/footer.php' ?>
 
-
+<script>
+	  function validate(){
+        
+        var password_1=document.getElementsByName('password-1')[0].value;
+        var password_2=document.getElementsByName('password-2')[0].value;
+        
+             if (password_1 != password_2){
+              document.getElementById('errorPW').innerHTML=" khong trung mat khau"
+               return false;
+             }    
+       }
+</script>
 </body>
 </html> 

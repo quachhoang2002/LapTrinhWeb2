@@ -83,7 +83,7 @@
                 <div class="col-md-2  d-flex justify-content-center text-center">
                   <div>
                     <p class="small text-muted pb-2 ">Price</p>
-                    <p class="lead fw-normal mb-0 "  id="price<?php echo $each['id'] ?>"> <?php echo $each['price'] ?>$ </p>
+                    <p class="lead fw-normal mb-0 "  id="price<?php echo $each['id'] ?>"> <?php echo $each['price'] ?> Vnd </p>
                   </div>
                 </div>
                 <div class="col-md-2  d-flex justify-content-center text-center">
@@ -106,7 +106,7 @@
                 <p class="mb-0 me-5 d-flex align-items-center">
                   <span class="small text-muted me-2">Order total:</span> 
                   <span
-                    class="lead fw-normal" id="total"><?php echo $total ?>$ 
+                    class="lead fw-normal" id="total"><?php echo $total ?> Vnd 
                   </span>
                 </p>
               </div>

@@ -70,7 +70,7 @@ session_start();
 
                  </td>
                  <td class="text-center"> <button onclick="showdetail(<?php echo $each['id'] ?>)" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#myModal">Chi tiet</button></td>  
-                 <td>  <button <?php if($each['status']!=0){?> disabled <?php } ?> onclick="cancel(<?php echo $each['id'] ?>)" >
+                 <td>  <button class="btn btn-danger" <?php if($each['status']!=0){?> disabled <?php } ?> onclick="cancel(<?php echo $each['id'] ?>)" >
                          Huy Don
                        </button> 
                  </td>

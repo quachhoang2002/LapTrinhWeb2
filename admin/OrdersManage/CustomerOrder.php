@@ -99,7 +99,7 @@
                <tr>
                   <th> San Pham</th>
                   <th> So Luong</th>
-                  <th> Tong </th>
+  
                </tr>
              </thead>    
                

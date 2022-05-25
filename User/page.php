@@ -36,18 +36,33 @@
      </div>
     
     
-      <div class="row d-flex   ">
+      <div class="row ms-2 ">
           <div class="col-2 mt-5 ">
-             <caption>
-               <input type="text" name="search" value="">
-                   <select name="type" id="">
+            <div class="row ">
+             <caption >
+               <div class="row">
+                   <input type="text" name="search" value="" placeholder="Prodcut Name" class="form-control "  >
+               </div>
+               <div class="row mt-2">
+                   <select name="type" id="" class="form-select w-50  ">
                           <option value=""> All </option>
                           <?php foreach($product_type as  $each){?>          
                            <option value="<?php echo $each['id']?>"> <?php echo $each['Type'] ?> </option>
                            <?php } ?>  
                     </select>
-               <button onclick="filter()">tim kiem</button>
-              </caption>    
+               </div>
+
+                 <div class="row mt-2">
+                    <input type="text" class="col-3" placeholder="min" value="" name="price_1">
+                     -- 
+                    <input type="text" class="col-3" placeholder="max" value="" name="price_2">
+                 </div>
+   
+
+                   <button onclick="filter()" class="btn btn-primary mt-2 w-50  ">Filter</button>
+         
+              </caption>  
+            </div>  
            </div>
        
           <div class="col-8 " style="background-color:whitesmoke ;">
@@ -66,23 +81,29 @@
 
 </body>  
 <script type="text/javascript">
-    
+  //filter pagination
     function PageNumber(page){
       var search=  $('input[name=search]').val();
       var type= $('select[name=type]').val();
-      $('#loadPage').load('process.php?action=Page',{page:page,search:search,type:type})
+      var price_1=  $('input[name=price_1]').val();
+      var price_2=  $('input[name=price_2]').val();
+      $('#loadPage').load('process.php?action=Page',{page:page,search:search,type:type,price_1:price_1,price_2:price_2})
       location.href="#"
     }
 
    function filter(){
-     var search=  $('input[name=search]').val();
+      var search=  $('input[name=search]').val();
       var type= $('select[name=type]').val();
-   
-      $('#loadPage').load('process.php?action=Page',{search:search,type:type})
+      var price_1=  $('input[name=price_1]').val();
+      var price_2=  $('input[name=price_2]').val();
+      
+      $('#loadPage').load('process.php?action=Page',{search:search,type:type,price_1:price_1,price_2:price_2})
    }
 
   $('#loadPage').load('process.php?action=Page')
-    function check(event) {
+
+// validate input
+   function check(event) {
       var x = event.charCode || event.keyCode;
       if (x <48 || x > 57) {  
          event.preventDefault()
@@ -100,7 +121,7 @@
             quantity=$('#quantity_'+id).val(Math.round($('#quantity_'+id).val()))
           }
    }   
-   
+  
   function addtoCart(id){
        
           var name= $('#name_'+id).val() ;
@@ -123,7 +144,7 @@
            })
       }
      
- function order(id){
+  function order(id){
       
           var name= $('#name_'+id).val() ;
           var price= $('#price_'+id).val() ;

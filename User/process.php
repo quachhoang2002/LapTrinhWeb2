@@ -114,12 +114,30 @@ session_start() ;
               if(isset($_POST['type'])){   
                 $type=$_POST['type'];
                  }  
+                 
               $user_id="";
               if(isset($_SESSION['id'])){
                 $user_id=$_SESSION['id'];
               }
+
+           
+             if(isset($_POST['price_1']) && $_POST['price_1']!='' ){
+              $price_1=$_POST['price_1'];
+             }
+             else{ 
+               $price_1=0;
+             }
+            
+
+             if(isset($_POST['price_2']) && $_POST['price_2']!=''){
+              $price_2=$_POST['price_2'];
+             }
+             else{
+               $price_2=100000000000;
+             }
+             
          
-              $sql = "select count(*)from product  where Name  like '%$search%' and product_type like '%$type%' ";
+              $sql = "select count(*)from product  where Name  like '%$search%' and product_type like '%$type%' and ( price between $price_1 and $price_2 )  ";
               $itemArray= mysqli_query($connect,$sql);
               $ItemResult= mysqli_fetch_array($itemArray);
               $TotalItem= $ItemResult['count(*)'];
@@ -131,7 +149,7 @@ session_start() ;
            
               $sql="select product.* ,category.id as category_id from product
               join category on product.product_type = category.id
-              where Name like '%$search%' and product_type like '%$type%'
+              where Name like '%$search%' and product_type like '%$type%' and ( product.price between $price_1 and $price_2 ) 
               limit $ItemOnPage
               offset $DropItem; 
                "  ; 
@@ -175,8 +193,7 @@ session_start() ;
                  </div>
                   ' ;
                  } ; 
-                  
-             
+                            
                  $ouput.='<nav aria-label="Page navigation example mb-2">
                             <ul class="pagination justify-content-center mt-2">';
                  for($i=1;$i<=$PerPage;$i++){
@@ -235,27 +252,41 @@ session_start() ;
                      break;
 
                      case 'ChangePassword':
-                            $old_password=md5($_POST['old-password']);
-                            $new_password=md5($_POST['new-password']);
-                            $id=$_POST['id'];
-                            $result=mysqli_query($connect,"select password from user where id= $id ");
-                            $result=mysqli_fetch_array($result);
-                            if($result['password']!= $old_password){
-                              $_SESSION['error']="khong trung voi mat khau cu";
-                              header('location:profile.php');  
-                              exit;
-                            }
-                            if((empty($new_password))||(empty($old_password)) ) {
-                              $_SESSION['error']='hay nhap day du ';
-                              header('location:profile.php');  
-                              exit;
-                            }
-                            else {
-                              mysqli_query($connect,"update user set password ='$new_password' where id=$id ");   
-                              $_SESSION['success']='Thay doi thanh cong';
-                              header('location:profile.php');
-                            }
-                            break;
+                           $old_password=md5($_POST['old-password']);
+                           $new_password=md5($_POST['new-password']);
+                           $id=$_POST['id'];
+                           $result=mysqli_query($connect,"select password from user where id= $id ");
+                           $result=mysqli_fetch_array($result);
+                           if($result['password']!= $old_password){
+                             $_SESSION['error']="khong trung voi mat khau cu";
+                             header('location:profile.php');  
+                             exit;
+                           }
+                           if((empty($new_password))||(empty($old_password)) ) {
+                             $_SESSION['error']='hay nhap day du ';
+                             header('location:profile.php');  
+                             exit;
+                           }
+                           else {
+                             mysqli_query($connect,"update user set password ='$new_password' where id=$id ");   
+                             $_SESSION['success']='Thay doi thanh cong';
+                             header('location:profile.php');
+                           }
+                           break;
+                    case 'voucher':
+                           $voucher=$_POST['voucher'];
+                           $result=mysqli_query($connect,"select * from voucher where code='$voucher'");
+                           $discount=mysqli_fetch_array($result)['discount'];
+                           if (mysqli_num_rows($result)==1){
+                              $_SESSION['code']=$_POST['voucher'];
+                              $_SESSION['discount']=1-($discount/100);
+                              header('location:order.php');
+                           }
+                           else {
+                             $_SESSION['error']='ma khong hop le';
+                             header('location:order.php');
+                           }
+                    break;
 
 
       default: 

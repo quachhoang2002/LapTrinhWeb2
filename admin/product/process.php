@@ -19,14 +19,10 @@ $action = $_GET['action'];
         $error= mysqli_error($connect);
         echo $error;
         mysqli_close($connect);
-        header('location:../index.php'); 
+        header('location:../index.php?side=Product'); 
         mysqli_close($connect);
         break;
-    case 'createType':
-          $type=$_POST['type'];
-          mysqli_query($connect,"insert into category(Type) values('$type')") ;
-          mysqli_close($connect);
-          break;
+
      case 'delete':
            $id =$_POST['id'];
            $sql=" delete from product where id=$id ";
@@ -54,7 +50,7 @@ $action = $_GET['action'];
            else {
               mysqli_query($connect,"update product set Name='$name',Price=$price,product_type=$type,description='$description',manufacture_id=$manufacture_id where id=$id");   
            }
-           header('location:../index.php');
+           header('location:../index.php?side=Product');
            break;
   
       

@@ -43,7 +43,7 @@
                     mysqli_query($connect,"insert into user(fullname,address,username,phone,password,email) values ('$name','$address','$username','$phone','$password_1','$email')"); 
                     header('location:login-form.php');
                     mysqli_close($connect);
-                   $_SESSION['success']="dang ky thanh cong ";
+      
                   };
                   break;
           
@@ -81,7 +81,22 @@
                        exit;                  
                   } 
                     break;
-          
+        case 'forgot-password':
+                  $password=md5($_POST['password-1']);
+                  $email=$_POST['email'];
+                  $username=trim($_POST['username']);
+                  $check_email=mysqli_query($connect,"select email from user where username='$username'");
+                  $check_email=mysqli_fetch_array($check_email)['email'];
+                  if($email == $check_email){
+                    mysqli_query($connect,"update user set password='$password' where username='$username'");
+                    mysqli_close($connect);
+                    header('location:forgot-pw.php');
+                  }
+                  else {
+                    $_SESSION['error']="email khong chinh xac ";
+                    header('location:login-form.php');
+                  }
+                 
                     
       default: 
              echo"???";

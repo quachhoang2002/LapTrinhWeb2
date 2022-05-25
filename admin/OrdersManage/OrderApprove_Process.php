@@ -21,7 +21,6 @@
                 <tr>
                   <td>'.$each['Name'].'</td>
                   <td>'.$each['quantity'].'</td>
-                  <td>'.$each['quantity']*$each['Price'].'</td>
                  </tr>
                ';
             }   

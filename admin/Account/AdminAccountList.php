@@ -4,7 +4,7 @@
         exit;
         
       } 
-      if(($_SESSION['level'])!=1){
+      if(($_SESSION['level'])<1){
           echo "ban khong co quyen truy cap ";
            exit;
       }
